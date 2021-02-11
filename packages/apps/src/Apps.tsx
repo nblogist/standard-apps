@@ -17,6 +17,10 @@ import Content from './Content';
 import SideBar from './SideBar';
 import WarmUp from './WarmUp';
 
+// polkadot js test
+// import { testTx } from "./PolkaDot";
+//
+
 interface SidebarState {
   isCollapsed: boolean;
   isMenu: boolean;
@@ -31,6 +35,12 @@ function saveSidebar (sidebar: SidebarState): SidebarState {
 }
 
 function Apps ({ className = '' }: Props): React.ReactElement<Props> {
+    // polkadot js text
+    // (async () => {
+    //   await testTx;
+    // })();
+    //
+  
   const { systemChain, systemName } = useApi();
   const [sidebar, setSidebar] = useState<SidebarState>({
     isCollapsed: false,
