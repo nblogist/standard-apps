@@ -2,23 +2,23 @@
 // and @canvas-ui/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import { getSystemChainColor } from '@canvas-ui/apps-config/ui';
-import { defaultColor } from '@canvas-ui/apps-config/ui/general';
-import { ScrollToTop } from '@canvas-ui/react-components';
-import GlobalStyle from '@canvas-ui/react-components/styles';
-import { BareProps as Props } from '@canvas-ui/react-components/types';
-import { useApi } from '@canvas-ui/react-hooks';
-import React, { useCallback, useMemo, useState } from 'react';
-import store from 'store';
-import styled from 'styled-components';
+import { getSystemChainColor } from "@canvas-ui/apps-config/ui";
+import { defaultColor } from "@canvas-ui/apps-config/ui/general";
+import { ScrollToTop } from "@canvas-ui/react-components";
+import GlobalStyle from "@canvas-ui/react-components/styles";
+import { BareProps as Props } from "@canvas-ui/react-components/types";
+import { useApi } from "@canvas-ui/react-hooks";
+import React, { useCallback, useMemo, useState } from "react";
+import store from "store";
+import styled from "styled-components";
 
-import { SIDEBAR_MENU_THRESHOLD, SideBarTransition } from './constants';
-import Content from './Content';
-import SideBar from './SideBar';
-import WarmUp from './WarmUp';
+import { SIDEBAR_MENU_THRESHOLD, SideBarTransition } from "./constants";
+import Content from "./Content";
+import SideBar from "./SideBar";
+import WarmUp from "./WarmUp";
 
 // polkadot js test
-// import { testTx } from "./PolkaDot";
+import { testTx } from "./PolkaDot";
 //
 
 interface SidebarState {
@@ -28,71 +28,76 @@ interface SidebarState {
   transition: SideBarTransition;
 }
 
-export const PORTAL_ID = 'portals';
+export const PORTAL_ID = "portals";
 
-function saveSidebar (sidebar: SidebarState): SidebarState {
-  return store.set('sidebar', sidebar) as SidebarState;
+function saveSidebar(sidebar: SidebarState): SidebarState {
+  return store.set("sidebar", sidebar) as SidebarState;
 }
 
-function Apps ({ className = '' }: Props): React.ReactElement<Props> {
-    // polkadot js text
-    // (async () => {
-    //   await testTx;
-    // })();
-    //
-  
+function Apps({ className = "" }: Props): React.ReactElement<Props> {
+  // polkadot js text
+  // (async () => {
+  //   await testTx;
+  // })();
+  //
+
   const { systemChain, systemName } = useApi();
   const [sidebar, setSidebar] = useState<SidebarState>({
-    isCollapsed: false,
+    // bjhl, inital collapse based on window.innerwidth
+    isCollapsed: window.innerWidth < SIDEBAR_MENU_THRESHOLD ? true : false,
     isMenuOpen: false,
     transition: SideBarTransition.COLLAPSED,
-    ...store.get('sidebar', {}),
+    ...store.get("sidebar", {}),
     isMenu: window.innerWidth < SIDEBAR_MENU_THRESHOLD
   });
-  const uiHighlight = useMemo(
-    (): string | undefined => getSystemChainColor(systemChain, systemName),
-    [systemChain, systemName]
-  );
+  const uiHighlight = useMemo((): string | undefined => getSystemChainColor(systemChain, systemName), [
+    systemChain,
+    systemName
+  ]);
 
   const _collapse = useCallback(
     (): void => setSidebar((sidebar: SidebarState) => saveSidebar({ ...sidebar, isCollapsed: !sidebar.isCollapsed })),
     []
   );
+
   const _toggleMenu = useCallback(
-    (): void => setSidebar((sidebar: SidebarState) => saveSidebar({ ...sidebar, isCollapsed: false, isMenuOpen: true })),
+    (): void =>
+      setSidebar((sidebar: SidebarState) => saveSidebar({ ...sidebar, isCollapsed: false, isMenuOpen: true })),
     []
   );
-  const _handleResize = useCallback(
-    (): void => {
-      const transition = window.innerWidth < SIDEBAR_MENU_THRESHOLD
-        ? SideBarTransition.MINIMISED_AND_EXPANDED
-        : SideBarTransition.EXPANDED_AND_MAXIMISED;
+  const _handleResize = useCallback((): void => {
+    const transition =
+      window.innerWidth < SIDEBAR_MENU_THRESHOLD ? SideBarTransition.COLLAPSED : SideBarTransition.EXPANDED;
 
-      setSidebar((sidebar: SidebarState) => saveSidebar({
+    setSidebar((sidebar: SidebarState) =>
+      saveSidebar({
         ...sidebar,
-        isMenu: transition === SideBarTransition.MINIMISED_AND_EXPANDED,
+        // bjhl, isCollapsed now tracks whether viewport is on the bottom or not
+        isCollapsed: transition === SideBarTransition.COLLAPSED,
+        isMenu: transition === SideBarTransition.COLLAPSED,
         isMenuOpen: false,
         transition
-      }));
-    },
-    []
-  );
+      })
+    );
+  }, []);
 
   const { isCollapsed, isMenuOpen } = sidebar;
 
+  // bjhl, isCollapsed -> isCollapsed from false
   return (
     <>
       <ScrollToTop />
       <GlobalStyle uiHighlight={defaultColor || uiHighlight} />
-      <div className={`apps--Wrapper ${isCollapsed ? 'collapsed' : 'expanded'} ${isMenuOpen ? 'menu-open' : ''} theme--default ${className}`}>
-        <div
-          className={`apps--Menu-bg ${isMenuOpen ? 'open' : 'closed'}`}
-          onClick={_handleResize}
-        />
+      <div
+        className={`apps--Wrapper ${isCollapsed ? "collapsed" : "expanded"} ${
+          isMenuOpen ? "menu-open" : ""
+        } theme--default ${className}`}
+      >
+        <div className={`apps--Menu-bg ${isMenuOpen ? "open" : "closed"}`} onClick={_handleResize} />
         <SideBar
           collapse={_collapse}
           handleResize={_handleResize}
-          isCollapsed={false}
+          isCollapsed={isCollapsed}
           isMenuOpen={isMenuOpen}
           toggleMenu={_toggleMenu}
         />
@@ -112,44 +117,52 @@ export default React.memo(styled(Apps)`
   &.theme--default {
     a.apps--SideBar-Item-NavLink {
       border-radius: 0.25rem;
-      color: var(--grey60);
+      color: var(--grey40);
       display: block;
       padding: 0.5rem 0.5rem;
       white-space: nowrap;
 
       .svg-inline--fa {
         float: right;
-        color: var(--grey50);
+        color: var(--grey60);
       }
 
       &:hover {
-        background: var(--grey40);
+        background: var(--grey10);
         border-radius: var(--btn-radius-default);
         color: var(--grey80);
-        
+
         .svg-inline--fa {
-        color: var(--grey80);
-      }
+          color: var(--grey80);
+        }
       }
     }
 
     a.apps--SideBar-Item-NavLink-active {
-      background: var(--grey30);
+      // background: var(--grey60);
       border-radius: 4px;
       /* border-bottom: 2px solid transparent; */
-      color: var(--grey80);
+      // color: var(--grey00);
+      color: #000;
       font-weight: 600;
 
       .svg-inline--fa {
-        color: var(--grey80);
+        color: var(--grey0);
       }
 
       &:hover {
-        background: var(--grey40);
+        background: var(--grey60);
         color: var(--grey80);
         /* margin-right: 0; */
       }
     }
+  }
+
+  &.collapsed .apps--SideBar-Wrapper {
+    position: fixed;
+    width: 100%;
+    max-height: 5rem;
+    bottom: 0;
   }
 
   &.collapsed .apps--SideBar {
@@ -159,12 +172,24 @@ export default React.memo(styled(Apps)`
       display: none;
     }
 
-    .apps--SideBar-Item {
-      margin-left: 5px;
+    a.apps--SideBar-Item-NavLink {
+      width: 100%;
+    }
 
-      .text {
-        display: none;
-      }
+    .apps--Sidebar-logo-Wrapper {
+      display: none;
+    }
+
+    .apps--SideBar-Item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0;
+      // margin-left: 5px;
+
+      // .text {
+      //   display: none;
+      // }
     }
 
     .apps--SideBar-logo {
@@ -181,6 +206,11 @@ export default React.memo(styled(Apps)`
           display: none;
         }
       }
+    }
+
+    .apps--SideBar-collapse {
+      position: fixed;
+      display: flex;
     }
 
     .apps--SideBar-collapse .ui.basic.secondary.button {

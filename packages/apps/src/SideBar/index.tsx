@@ -2,16 +2,16 @@
 // and @canvas-ui/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import createRoutes from '@canvas-ui/apps-routing';
-import { Routes } from '@canvas-ui/apps-routing/types';
-import { media, Menu } from '@canvas-ui/react-components';
-import React, { useMemo } from 'react';
-import { Responsive } from 'semantic-ui-react';
-import styled from 'styled-components';
+import createRoutes from "@canvas-ui/apps-routing";
+import { Routes } from "@canvas-ui/apps-routing/types";
+import { media, Menu } from "@canvas-ui/react-components";
+import React, { useMemo } from "react";
+import { Responsive } from "semantic-ui-react";
+import styled from "styled-components";
 
-import { useTranslation } from '../translate';
-import Item from './Item';
-import Settings from './Settings';
+import { useTranslation } from "../translate";
+import Item from "./Item";
+import Settings from "./Settings";
 
 interface Props {
   className?: string;
@@ -22,51 +22,44 @@ interface Props {
   toggleMenu: () => void;
 }
 
-function SideBar ({ className = '', handleResize, isCollapsed }: Props): React.ReactElement<Props> {
+function SideBar({ className = "", handleResize, isCollapsed }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
-  const routing = useMemo<Routes>(
-    () => createRoutes(t),
-    [t]
-  );
-
+  const routing = useMemo<Routes>(() => createRoutes(t), [t]);
   return (
     <Responsive
-      className={`apps--SideBar-Wrapper ${className} ${isCollapsed ? 'collapsed' : 'expanded'}`}
+      className={`apps--SideBar-Wrapper ${className} ${isCollapsed ? "collapsed" : "expanded"}`}
       onUpdate={handleResize}
     >
-      <div className='apps--SideBar'>
-        <Menu
-          secondary
-          vertical
-        >
-          <div className='apps--SideBar-Scroll'>
-            {routing.map((route, index): React.ReactNode => (
-              route
-                ? (
-                  <Item
-                    isCollapsed={isCollapsed}
-                    key={route.name}
-                    onClick={handleResize}
-                    route={route}
-                  />
-                )
-                : (
-                  <Menu.Divider
-                    hidden
-                    key={index}
-                  />
-                )
-            ))}
+      <div className={`apps--SideBar ${isCollapsed ? "horizontal" : ""}`}>
+        <div className="apps--Sidebar-logo-Wrapper">
+          <a>Stable Coin</a>
+        </div>
+        <Menu secondary vertical={!isCollapsed}>
+          <div className={isCollapsed ? "apps--SideBar-collapse" : `apps--SideBar-Scroll`}>
+            {routing.map(
+              (route, index): React.ReactNode => {
+                return route ? (
+                  <Item isCollapsed={isCollapsed} key={route.name} onClick={handleResize} route={route} />
+                ) : (
+                  <Menu.Divider hidden key={index} />
+                );
+              }
+            )}
+            <div className="item" style={{ padding: 0, display: isCollapsed ? "block" : "none" }}>
+              <a className="apps--SideBar-Item-NavLink apps--Sidebar-more">
+                <span>More</span>
+              </a>
+            </div>
           </div>
         </Menu>
-        <Settings />
+        {isCollapsed ? "" : <Settings />}
       </div>
     </Responsive>
   );
 }
 
-const sideBorderWidth = '0.65rem';
+const sideBorderWidth = "0.65rem";
 
 export default React.memo(styled(SideBar)`
   display: flex;
@@ -74,9 +67,33 @@ export default React.memo(styled(SideBar)`
   position: relative;
   z-index: 300;
 
+  .apps--Sidebar-logo-Wrapper {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0 1rem;
+    padding-top: 1rem;
+    font-size: 1rem;
+  }
+
+  .apps--Sidebar-more {
+    user-select: none !important;
+  }
+
+  .horizontal {
+    flex-flow: row !important;
+  }
+
+  .apps--SideBar-collapse {
+    .apps--SideBar-Item {
+      flex: 1 1 0 !important;
+    }
+  }
+
   .apps--SideBar {
     align-items: center;
-    background: var(--grey20);
+    background: #fff;
+    color: #000;
     box-sizing: border-box;
     display: flex;
     flex-flow: column;
@@ -95,18 +112,19 @@ export default React.memo(styled(SideBar)`
 
     .ui.vertical.menu {
       display: flex;
-      height: 100vh;
+      // height: 100vh;
       margin: 0;
       top: 0;
       width: 100%;
       position: sticky;
+      flex-grow: 1;
     }
 
     .apps--SideBar-Scroll {
       align-items: center;
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      // height: 100vh;
       overflow-y: auto;
       width: 100%;
       scrollbar-width: none;
@@ -145,7 +163,7 @@ export default React.memo(styled(SideBar)`
     .apps--SideBar-collapse {
       bottom: 0;
       left: 0;
-      padding: 0.75rem 0 .75rem 0.65rem;
+      padding: 0.75rem 0 0.75rem 0.65rem;
       position: sticky;
       right: 0;
       text-align: left;
@@ -169,7 +187,7 @@ export default React.memo(styled(SideBar)`
       width: 6px;
 
       &:hover {
-        background: rgba(255,255,255,0.15);
+        background: rgba(255, 255, 255, 0.15);
         cursor: pointer;
       }
     }

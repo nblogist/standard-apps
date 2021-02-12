@@ -1369,6 +1369,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@canvas-ui/app-farm@workspace:packages/page-farm":
+  version: 0.0.0-use.local
+  resolution: "@canvas-ui/app-farm@workspace:packages/page-farm"
+  dependencies:
+    "@babel/runtime": ^7.10.2
+  languageName: unknown
+  linkType: soft
+
+"@canvas-ui/app-onsen@workspace:packages/page-onsen":
+  version: 0.0.0-use.local
+  resolution: "@canvas-ui/app-onsen@workspace:packages/page-onsen"
+  dependencies:
+    "@babel/runtime": ^7.10.2
+  languageName: unknown
+  linkType: soft
+
 "@canvas-ui/app-settings@workspace:packages/page-settings":
   version: 0.0.0-use.local
   resolution: "@canvas-ui/app-settings@workspace:packages/page-settings"
@@ -1379,6 +1395,14 @@ __metadata:
     "@canvas-ui/react-query": 0.45.0-beta.33
     file-saver: ^2.0.2
     query-string: ^6.13.1
+  languageName: unknown
+  linkType: soft
+
+"@canvas-ui/app-swap@workspace:packages/page-swap":
+  version: 0.0.0-use.local
+  resolution: "@canvas-ui/app-swap@workspace:packages/page-swap"
+  dependencies:
+    "@babel/runtime": ^7.10.2
   languageName: unknown
   linkType: soft
 

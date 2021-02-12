@@ -12,7 +12,7 @@ import New from "./New";
 import Success from "./Success";
 import { ComponentProps } from "./types";
 
-function DeployApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
+function FarmApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
   const { allCodes, hasCodes, isLoading, updated } = useCodes();
 
   const componentProps = useMemo(
@@ -46,4 +46,4 @@ function DeployApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
   );
 }
 
-export default React.memo(DeployApp);
+export default React.memo(FarmApp);

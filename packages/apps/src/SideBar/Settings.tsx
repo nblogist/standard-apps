@@ -2,59 +2,50 @@
 // and @canvas-ui/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import { Dropdown, Icon, Tooltip } from '@canvas-ui/react-components';
-import { ELEV_4_CSS } from '@canvas-ui/react-components/styles/constants';
-import { BareProps as Props } from '@canvas-ui/react-components/types';
-import { useApi, useEndpoints, useSettings } from '@canvas-ui/react-hooks';
-import { classes, useEndpointOptions } from '@canvas-ui/react-util';
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import { Dropdown, Icon, Tooltip } from "@canvas-ui/react-components";
+import { ELEV_4_CSS } from "@canvas-ui/react-components/styles/constants";
+import { BareProps as Props } from "@canvas-ui/react-components/types";
+import { useApi, useEndpoints, useSettings } from "@canvas-ui/react-hooks";
+import { classes, useEndpointOptions } from "@canvas-ui/react-util";
+import React from "react";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
-import { useTranslation } from '../translate';
+import { useTranslation } from "../translate";
 
-function Settings ({ className }: Props): React.ReactElement<Props> {
+function Settings({ className }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { isApiConnected } = useApi();
   const { onChangeKey } = useSettings(true);
-  const endpointState = useEndpoints(onChangeKey('apiUrl'));
+  const endpointState = useEndpoints(onChangeKey("apiUrl"));
   const endpointOptions = useEndpointOptions(endpointState, t, true);
 
   const { onChangeUrl, url } = endpointState;
 
   return (
-    <div className={`apps--SideBar-settings ${className || ''}`}>
+    <div className={`apps--SideBar-settings ${className || ""}`}>
       <Dropdown
-        className={classes('chain-dropdown', !isApiConnected && 'isDisconnected')}
+        className={classes("chain-dropdown", !isApiConnected && "isDisconnected")}
         defaultValue={url}
         onChange={onChangeUrl}
         options={endpointOptions}
         withLabel={false}
       />
-      <NavLink
-        className='settings-link'
-        data-for='settings-link'
-        data-tip
-        to='/settings'
-      >
-        <Icon icon='cog' />
+      <NavLink className="settings-link" data-for="settings-link" data-tip to="/settings">
+        <Icon icon="cog" />
       </NavLink>
-      <Tooltip
-        place='top'
-        text={t<string>('Settings')}
-        trigger='settings-link'
-      />
+      <Tooltip place="top" text={t<string>("Settings")} trigger="settings-link" />
     </div>
   );
 }
 
 export default React.memo(styled(Settings)`
   align-items: center;
-  bottom: 0;
+  // bottom: 0;
   display: flex;
-  left: 0;
+  // left: 0;
   padding: 0 1rem 1rem;
-  position: fixed;
+  // position: fixed;
   width: 14.25rem;
 
   .chain-dropdown {
@@ -100,7 +91,7 @@ export default React.memo(styled(Settings)`
               }
 
               &:after {
-                content: '\f00c';
+                content: "\f00c";
                 font-family: Icons;
                 font-size: 1rem;
               }
@@ -125,7 +116,8 @@ export default React.memo(styled(Settings)`
     height: 32px;
     margin-left: 0.75rem;
 
-    &, &:hover {
+    &,
+    &:hover {
       color: var(--grey50);
     }
 
