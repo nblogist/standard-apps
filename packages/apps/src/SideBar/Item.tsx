@@ -4,7 +4,7 @@
 
 import { Route } from "@canvas-ui/apps-routing/types";
 import { Badge, Icon, Menu, Tooltip } from "@canvas-ui/react-components";
-import React, { useMemo } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 
 const DUMMY_COUNTER = (): null => null;
@@ -21,8 +21,8 @@ type iconsMapping = {
   [key: string]: string;
 };
 const icons: iconsMapping = {
-  ["swap"]: "sync",
-  ["farm"]: "seedling",
+  ["swap"]: "dharmachakra",
+  ["farm"]: "gem",
   ["onsen"]: "spa"
 };
 
@@ -37,10 +37,10 @@ function Item({ isCollapsed, onClick, route }: Props): React.ReactElement<Props>
 
   const body = (
     <>
+      <Icon icon={icons[name] || "chevron-right"} />
       <span className="text">{text}</span>
       {!!count && <Badge info={count} isInline type="counter" />}
       <Tooltip offset={TOOLTIP_OFFSET} place="right" text={text} trigger={`nav-${name}`} />
-      <Icon icon={icons[name] || "chevron-right"} />
     </>
   );
 

@@ -6,13 +6,12 @@ import useCodes from "@canvas-ui/apps/useCodes";
 import { WithLoader } from "@canvas-ui/react-components";
 import React, { useMemo } from "react";
 import { Route, Switch } from "react-router";
-
-import Codes from "./Codes";
-import New from "./New";
-import Success from "./Success";
+import styled from "styled-components";
 import { ComponentProps } from "./types";
+import TableTabs from "./TableTabs";
+import Table from "./Table";
 
-function FarmApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
+function FarmApp({ basePath, navigateTo, className = "" }: Props): React.ReactElement<Props> {
   const { allCodes, hasCodes, isLoading, updated } = useCodes();
 
   const componentProps = useMemo(
@@ -28,17 +27,25 @@ function FarmApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
   );
 
   return (
-    <main className="deploy--App">
+    <main className={`farm--App ${className}`}>
       <WithLoader isLoading={isLoading}>
+        <TableTabs basePath={basePath} />
         <Switch>
-          <Route path={`${basePath}/new/:id?/:index?`}>
-            <New {...componentProps} />
+          <Route path={`${basePath}/standard-bar`}>
+            standard-bar
+            <Table />
           </Route>
-          <Route path={`${basePath}/success/:address`}>
-            <Success {...componentProps} />
+          <Route path={`${basePath}/permanent`}>
+            permanent
+            <Table />
+          </Route>
+          <Route path={`${basePath}/onsen`}>
+            onsen
+            <Table />
           </Route>
           <Route exact>
-            <Codes {...componentProps} />
+            index
+            <Table />
           </Route>
         </Switch>
       </WithLoader>
@@ -46,4 +53,9 @@ function FarmApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
   );
 }
 
-export default React.memo(FarmApp);
+export default React.memo(styled(FarmApp)`
+  background: ${props => props.theme.farm.bg};
+  border-radius: ${props => props.theme.generals.xs};
+  box-shadow: var(--grey80) 0px 0px 21px;
+  margin: ${props => props.theme.margins.ssuper};
+`);

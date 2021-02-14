@@ -33,7 +33,7 @@ function SideBar({ className = "", handleResize, isCollapsed }: Props): React.Re
     >
       <div className={`apps--SideBar ${isCollapsed ? "horizontal" : ""}`}>
         <div className="apps--Sidebar-logo-Wrapper">
-          <a>Stable Coin</a>
+          <a className="apps--Sidebar-logo-text">{"Stable Coin"}</a>
         </div>
         <Menu secondary vertical={!isCollapsed}>
           <div className={isCollapsed ? "apps--SideBar-collapse" : `apps--SideBar-Scroll`}>
@@ -66,14 +66,21 @@ export default React.memo(styled(SideBar)`
   min-width: 14.25rem;
   position: relative;
   z-index: 300;
+  box-shadow: var(--grey80) 0px 20px 20px 0px;
 
   .apps--Sidebar-logo-Wrapper {
     display: flex;
     justify-content: flex-start;
     width: 100%;
-    padding: 0 1rem;
-    padding-top: 1rem;
-    font-size: 1rem;
+    padding: 0 ${props => props.theme.paddings.xxxl};
+    padding-top: ${props => props.theme.paddings.super};
+    padding-bottom: ${props => props.theme.paddings.xl};
+    font-size: ${props => props.theme.fontSizes.xxxxl};
+    font-family: Bebas Neue;
+  }
+
+  .apps--Sidebar-logo-text {
+    color: ${props => props.theme.root.text} !important;
   }
 
   .apps--Sidebar-more {
@@ -137,15 +144,15 @@ export default React.memo(styled(SideBar)`
 
     .apps--SideBar-Item {
       align-self: flex-end;
-      flex-grow: 0;
       font-size: 1rem;
       padding: 0 !important;
       position: relative;
-      width: inherit;
+      width: 100%;
+      display: flex !important;
 
-      &:not(:last-child) {
-        margin-bottom: 0.75rem;
-      }
+      // &:not(:last-child) {
+      //   margin-bottom: 0.75rem;
+      // }
 
       .ui--Badge {
         margin: 0;

@@ -9,7 +9,7 @@ import { Routes } from "./types";
 // import upload from './upload';
 import swap from "./swap";
 import farm from "./farm";
-import onsen from "./onsen";
+// import onsen from "./onsen";
 
 export default function create(t: <T = string>(key: string, text: string, options: { ns: string }) => T): Routes {
   return [
@@ -18,7 +18,7 @@ export default function create(t: <T = string>(key: string, text: string, option
     // execute(t),
     // settings(t),
     swap(t),
-    farm(t),
-    onsen(t)
+    farm(t)
+    // onsen(t)
   ];
 }

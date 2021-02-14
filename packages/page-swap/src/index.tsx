@@ -5,12 +5,8 @@ import { AppProps as Props } from "@canvas-ui/apps/types";
 import useCodes from "@canvas-ui/apps/useCodes";
 import { WithLoader } from "@canvas-ui/react-components";
 import React, { useMemo } from "react";
-import { Route, Switch } from "react-router";
-
-import Codes from "./Codes";
-import New from "./New";
-import Success from "./Success";
 import { ComponentProps } from "./types";
+import Swap from "./Swap";
 
 function SwapApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
   const { allCodes, hasCodes, isLoading, updated } = useCodes();
@@ -28,9 +24,10 @@ function SwapApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
   );
 
   return (
-    <main className="deploy--App">
+    <main className="swap--App">
       <WithLoader isLoading={isLoading}>
-        <Switch>
+        <Swap />
+        {/*<Switch>
           <Route path={`${basePath}/new/:id?/:index?`}>
             <New {...componentProps} />
           </Route>
@@ -40,7 +37,7 @@ function SwapApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
           <Route exact>
             <Codes {...componentProps} />
           </Route>
-        </Switch>
+        </Switch>*/}
       </WithLoader>
     </main>
   );

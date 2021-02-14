@@ -116,43 +116,41 @@ export default React.memo(styled(Apps)`
 
   &.theme--default {
     a.apps--SideBar-Item-NavLink {
-      border-radius: 0.25rem;
-      color: var(--grey40);
-      display: block;
-      padding: 0.5rem 0.5rem;
+      font-size: ${props => props.theme.fontSizes.base};
+      color: ${props => props.theme.sidebar.item.text};
+      padding: ${props => props.theme.paddings.xxxxl};
       white-space: nowrap;
+      flex: 1;
+      width: 100%;
+      border-left: ${props => props.theme.sidebar.item.borderSize} solid transparent;
 
       .svg-inline--fa {
-        float: right;
-        color: var(--grey60);
+        font-size: ${props => props.theme.fontSizes.lg};
+        margin-right: ${props => props.theme.margins.base};
+        color: ${props => props.theme.sidebar.item.icon};
       }
 
       &:hover {
-        background: var(--grey10);
-        border-radius: var(--btn-radius-default);
-        color: var(--grey80);
+        background: ${props => props.theme.sidebar.hover.bg};
+        // color: var(--grey80);
 
         .svg-inline--fa {
-          color: var(--grey80);
+          // color: var(--grey80);
         }
       }
     }
 
     a.apps--SideBar-Item-NavLink-active {
-      // background: var(--grey60);
-      border-radius: 4px;
-      /* border-bottom: 2px solid transparent; */
-      // color: var(--grey00);
-      color: #000;
-      font-weight: 600;
-
-      .svg-inline--fa {
-        color: var(--grey0);
+      background: ${props => props.theme.sidebar.selected.bg};
+      border-left: ${props => props.theme.sidebar.item.borderSize} solid ${props => props.theme.sidebar.selected.border} !important;
+      color: ${props => props.theme.sidebar.item.text};
+      background: ${props => props.theme.sidebar.selected.bg} // font-weight: 600;
+        .svg-inline--fa {
+        color: ${props => props.theme.sidebar.selected.icon};
       }
 
       &:hover {
-        background: var(--grey60);
-        color: var(--grey80);
+        // color: var(--grey80);
         /* margin-right: 0; */
       }
     }
@@ -185,11 +183,6 @@ export default React.memo(styled(Apps)`
       justify-content: center;
       align-items: center;
       margin-bottom: 0;
-      // margin-left: 5px;
-
-      // .text {
-      //   display: none;
-      // }
     }
 
     .apps--SideBar-logo {
@@ -222,7 +215,7 @@ export default React.memo(styled(Apps)`
     text-align: left;
 
     .apps--SideBar-Scroll {
-      padding: 1.5rem 1rem;
+      // padding: 1.5rem 1rem;
     }
   }
 
