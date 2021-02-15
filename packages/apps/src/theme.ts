@@ -13,6 +13,8 @@ const fontSizes = {
 };
 
 const generals = {
+  xxxs: calcRem(8),
+  xxs: calcRem(10),
   xs: calcRem(12),
   small: calcRem(14),
   base: calcRem(16),
@@ -79,6 +81,12 @@ const root = {
 
 const sidebar = {
   bg: "#ffffff",
+  balance: {
+    border: "#9a12b3",
+    amt: "#9a12b3",
+    amtBg: " #f1e7fe",
+    addr: "#9a12b3"
+  },
   item: {
     text: "#9a12b3",
     icon: "#9a12b3",
@@ -105,7 +113,8 @@ const table = {
 };
 
 const farm = {
-  bg: "#ffffff"
+  bg: "#ffffff",
+  border: "var(--grey80)"
 };
 
 const device = {

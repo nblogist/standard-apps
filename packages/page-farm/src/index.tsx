@@ -57,5 +57,6 @@ export default React.memo(styled(FarmApp)`
   background: ${props => props.theme.farm.bg};
   border-radius: ${props => props.theme.generals.xs};
   box-shadow: var(--grey80) 0px 0px 21px;
+  border: 1px solid ${props => props.theme.farm.border};
   margin: ${props => props.theme.margins.ssuper};
 `);

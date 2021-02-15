@@ -12,6 +12,7 @@ import styled from "styled-components";
 import { useTranslation } from "../translate";
 import Item from "./Item";
 import Settings from "./Settings";
+import Balance from "./Balance";
 
 interface Props {
   className?: string;
@@ -35,6 +36,7 @@ function SideBar({ className = "", handleResize, isCollapsed }: Props): React.Re
         <div className="apps--Sidebar-logo-Wrapper">
           <a className="apps--Sidebar-logo-text">{"Stable Coin"}</a>
         </div>
+        <Balance addr="0x3931h2837rIe9f82123123123" />
         <Menu secondary vertical={!isCollapsed}>
           <div className={isCollapsed ? "apps--SideBar-collapse" : `apps--SideBar-Scroll`}>
             {routing.map(

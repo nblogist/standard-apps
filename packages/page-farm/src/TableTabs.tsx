@@ -43,10 +43,10 @@ export default React.memo(styled(TableTabs)`
   margin: 0;
 
   .tabs-container {
-    padding-top: ${props => props.theme.paddings.small} !important;
+    padding: ${props => props.theme.paddings.small} !important;
   }
   .ui--Tab {
-    padding-top: ${props => props.theme.paddings.small} !important;
+    padding: ${props => props.theme.paddings.small} !important;
     font-size: ${props => props.theme.fontSizes.small};
     color: #000;
   }
