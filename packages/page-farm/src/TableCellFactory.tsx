@@ -83,7 +83,7 @@ function TableCellFactory({ className = "", cellData, type }: TableCellProps): R
 export default React.memo(styled(TableCellFactory)`
   .table-cell-head {
     font-size: ${props => props.theme.fontSizes.base};
-    font-weight: 600;
+    font-weight: 500;
     color: ${props => props.theme.root.text};
     margin-bottom: ${props => props.theme.margins.base};
   }

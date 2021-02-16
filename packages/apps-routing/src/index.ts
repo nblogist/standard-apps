@@ -4,21 +4,21 @@
 
 // import deploy from './deploy';
 // import execute from './execute';
-// import settings from './settings';
+import settings from "./settings";
 import { Routes } from "./types";
 // import upload from './upload';
 import swap from "./swap";
 import farm from "./farm";
-// import onsen from "./onsen";
+import collateralize from "./collateralize";
 
 export default function create(t: <T = string>(key: string, text: string, options: { ns: string }) => T): Routes {
   return [
     // upload(t),
     // deploy(t),
     // execute(t),
-    // settings(t),
+    settings(t),
+    collateralize(t),
     swap(t),
     farm(t)
-    // onsen(t)
   ];
 }

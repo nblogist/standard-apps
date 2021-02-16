@@ -14,10 +14,14 @@ function TableHeaders({ className = "", headers = [] }: TableHeaderProps): React
     });
   };
   return (
-    <SUITable.Header>
+    <SUITable.Header className={className}>
       <SUITable.Row>{renderCells()}</SUITable.Row>
     </SUITable.Header>
   );
 }
 
-export default React.memo(styled(TableHeaders)``);
+export default React.memo(styled(TableHeaders)`
+  th {
+    background: ${props => props.theme.farm.th} !important;
+  }
+`);

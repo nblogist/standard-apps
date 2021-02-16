@@ -43,21 +43,23 @@ export default React.memo(styled(TableTabs)`
   margin: 0;
 
   .tabs-container {
-    padding: ${props => props.theme.paddings.small} !important;
+    padding: 0 ${props => props.theme.paddings.xxl} !important;
   }
   .ui--Tab {
-    padding: ${props => props.theme.paddings.small} !important;
+    font-size: ${props => props.theme.fontSizes.base} !important;
+    padding: ${props => props.theme.paddings.xxxxl} ${props => props.theme.paddings.small} !important;
     font-size: ${props => props.theme.fontSizes.small};
     color: #000;
   }
 
   .tabLinkActive {
     color: ${props => props.theme.sidebar.item.text} !important;
+    border-bottom: 3px solid ${props => props.theme.table.tab.border};
   }
 
   .table-tabs-container {
     padding: 0;
     margin: 0;
-    border-bottom: 1px solid ${props => props.theme.table.tabs.border};
+    border-bottom: 0 !important;
   }
 `);

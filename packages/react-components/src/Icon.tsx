@@ -5,8 +5,9 @@
 import type { Icon as IconType, IconName } from '@fortawesome/fontawesome-svg-core';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-// import { far } from '@fortawesome/free-regular-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fab }from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
@@ -22,7 +23,8 @@ interface Props {
 }
 
 // one-time init of FA libraries
-// library.add(far);
+library.add(fab, far, fas);
+library.add(far);
 library.add(fas);
 
 function Icon ({ className = '', color = 'normal', icon, isSpinning, onClick, size = '1x', tooltip }: Props): React.ReactElement<Props> {

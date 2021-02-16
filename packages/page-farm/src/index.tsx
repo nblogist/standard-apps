@@ -32,19 +32,15 @@ function FarmApp({ basePath, navigateTo, className = "" }: Props): React.ReactEl
         <TableTabs basePath={basePath} />
         <Switch>
           <Route path={`${basePath}/standard-bar`}>
-            standard-bar
             <Table />
           </Route>
           <Route path={`${basePath}/permanent`}>
-            permanent
             <Table />
           </Route>
           <Route path={`${basePath}/onsen`}>
-            onsen
             <Table />
           </Route>
           <Route exact>
-            index
             <Table />
           </Route>
         </Switch>
@@ -53,6 +49,7 @@ function FarmApp({ basePath, navigateTo, className = "" }: Props): React.ReactEl
   );
 }
 
+// bjhl, refactor table to its own module
 export default React.memo(styled(FarmApp)`
   background: ${props => props.theme.farm.bg};
   border-radius: ${props => props.theme.generals.xs};

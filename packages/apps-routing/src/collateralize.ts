@@ -2,7 +2,7 @@
 // and @canvas-ui/apps-routing authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import Component from "@canvas-ui/app-onsen";
+import Component from "@canvas-ui/app-collateralize";
 
 import { Route } from "./types";
 
@@ -13,7 +13,7 @@ export default function create(t: <T = string>(key: string, text: string, option
       needsAccounts: true,
       needsApi: []
     },
-    name: "onsen",
-    text: t<string>("nav.onsen", "Onsen", { ns: "apps-routing" })
+    name: "collateralize",
+    text: t<string>("nav.collateralize", "Collateralize", { ns: "apps-routing" })
   };
 }

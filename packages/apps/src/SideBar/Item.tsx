@@ -18,12 +18,12 @@ interface Props {
 const TOOLTIP_OFFSET = { right: -4 };
 
 type iconsMapping = {
-  [key: string]: string;
+  [key: string]: string | Object;
 };
 const icons: iconsMapping = {
-  ["swap"]: "dharmachakra",
+  ["swap"]: "retweet",
   ["farm"]: "gem",
-  ["onsen"]: "spa"
+  ["collateralize"]: { prefix: "fas", iconName: "university" }
 };
 
 function Item({ isCollapsed, onClick, route }: Props): React.ReactElement<Props> | null {

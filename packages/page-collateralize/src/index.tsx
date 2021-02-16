@@ -5,14 +5,11 @@ import { AppProps as Props } from "@canvas-ui/apps/types";
 import useCodes from "@canvas-ui/apps/useCodes";
 import { WithLoader } from "@canvas-ui/react-components";
 import React, { useMemo } from "react";
-import { Route, Switch } from "react-router";
-
-import Codes from "./Codes";
-import New from "./New";
-import Success from "./Success";
+import styled from "styled-components";
 import { ComponentProps } from "./types";
+import Stake from "./Stake";
 
-function OnsenApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
+function CollateralizeApp({ basePath, navigateTo, className = "" }: Props): React.ReactElement<Props> {
   const { allCodes, hasCodes, isLoading, updated } = useCodes();
 
   const componentProps = useMemo(
@@ -28,22 +25,15 @@ function OnsenApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
   );
 
   return (
-    <main className="deploy--App">
+    <main className={`collateralize--App ${className}`}>
       <WithLoader isLoading={isLoading}>
-        <Switch>
-          <Route path={`${basePath}/new/:id?/:index?`}>
-            <New {...componentProps} />
-          </Route>
-          <Route path={`${basePath}/success/:address`}>
-            <Success {...componentProps} />
-          </Route>
-          <Route exact>
-            <Codes {...componentProps} />
-          </Route>
-        </Switch>
+        <Stake />
       </WithLoader>
     </main>
   );
 }
 
-export default React.memo(OnsenApp);
+export default React.memo(styled(CollateralizeApp)`
+  background: ${props => props.theme.farm.bg};
+  margin: ${props => props.theme.margins.ssuper};
+`);

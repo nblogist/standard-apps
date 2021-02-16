@@ -13,6 +13,7 @@ const fontSizes = {
 };
 
 const generals = {
+  xxxxs: calcRem(4),
   xxxs: calcRem(8),
   xxs: calcRem(10),
   xs: calcRem(12),
@@ -75,8 +76,12 @@ const colors = {
 const root = {
   bg: "#F9F9F9",
   border: "var(--grey40)",
+  color: "#9a12b3",
+  color1: "#f1e7fe",
+  color2: "#d5b8ff",
   text: "#9a12b3",
-  text1: "var(--grey50)"
+  text1: "var(--grey50)",
+  text2: "#f1e7fe"
 };
 
 const sidebar = {
@@ -107,14 +112,15 @@ const sidebar = {
 
 const table = {
   bg: "#ffffff",
-  tabs: {
-    border: root.border
+  tab: {
+    border: "#9a12b3"
   }
 };
 
 const farm = {
   bg: "#ffffff",
-  border: "var(--grey80)"
+  border: "var(--grey80)",
+  th: "#fff"
 };
 
 const device = {
