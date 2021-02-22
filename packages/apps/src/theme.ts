@@ -70,7 +70,8 @@ const deviceSizes = {
 
 const colors = {
   black: "#000000",
-  white: "#FFFFFF"
+  white: "#FFFFFF",
+  grey: "var(--grey50)"
 };
 
 const root = {

@@ -16,6 +16,8 @@ import ReactDOM from "react-dom";
 import { HashRouter } from "react-router-dom";
 import store from "store";
 import { ThemeProvider } from "styled-components";
+import { ModalProvider } from "react-modal-hook";
+
 import theme from "./theme";
 
 import settings from "@polkadot/ui-settings";
@@ -45,7 +47,9 @@ ReactDOM.render(
           <BlockAuthors>
             <Events>
               <HashRouter>
-                <Apps />
+                <ModalProvider>
+                  <Apps />
+                </ModalProvider>
               </HashRouter>
             </Events>
           </BlockAuthors>

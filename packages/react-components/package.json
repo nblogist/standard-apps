@@ -29,6 +29,7 @@
     "i18next": "^19.4.5",
     "i18next-browser-languagedetector": "^4.2.0",
     "react": "^16.13.1",
+    "react-animate-height": "^2.0.23",
     "react-beautiful-dnd": "^13.0.0",
     "react-chartjs-2": "^2.9.0",
     "react-copy-to-clipboard": "^5.0.2",

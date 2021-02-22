@@ -16,6 +16,7 @@ import { SIDEBAR_MENU_THRESHOLD, SideBarTransition } from "./constants";
 import Content from "./Content";
 import SideBar from "./SideBar";
 import WarmUp from "./WarmUp";
+import GlobalStyle2 from "./globalStyle";
 
 // polkadot js test
 import { testTx } from "./PolkaDot";
@@ -88,6 +89,7 @@ function Apps({ className = "" }: Props): React.ReactElement<Props> {
     <>
       <ScrollToTop />
       <GlobalStyle uiHighlight={defaultColor || uiHighlight} />
+      <GlobalStyle2 />
       <div
         className={`apps--Wrapper ${isCollapsed ? "collapsed" : "expanded"} ${
           isMenuOpen ? "menu-open" : ""

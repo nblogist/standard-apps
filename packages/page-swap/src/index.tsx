@@ -7,8 +7,9 @@ import { WithLoader } from "@canvas-ui/react-components";
 import React, { useMemo } from "react";
 import { ComponentProps } from "./types";
 import Swap from "./Swap";
+import styled from "styled-components";
 
-function SwapApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
+function SwapApp({ basePath, navigateTo, className }: Props): React.ReactElement<Props> {
   const { allCodes, hasCodes, isLoading, updated } = useCodes();
 
   const componentProps = useMemo(
@@ -24,9 +25,9 @@ function SwapApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
   );
 
   return (
-    <main className="swap--App">
+    <main className={`swap--App ${className}`}>
       <WithLoader isLoading={isLoading}>
-        <Swap />
+        <Swap />{" "}
         {/*<Switch>
           <Route path={`${basePath}/new/:id?/:index?`}>
             <New {...componentProps} />
@@ -43,4 +44,7 @@ function SwapApp({ basePath, navigateTo }: Props): React.ReactElement<Props> {
   );
 }
 
-export default React.memo(SwapApp);
+export default React.memo(styled(SwapApp)`
+  background: ${props => props.theme.farm.bg};
+  margin: ${props => props.theme.margins.ssuper};
+`);

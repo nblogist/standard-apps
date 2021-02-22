@@ -39,4 +39,10 @@ function BalanceInput({
   );
 }
 
-export default React.memo(styled(BalanceInput)``);
+export default React.memo(styled(BalanceInput)`
+  input {
+    &:focus {
+      color: ${props => props.theme.colors.black};
+    }
+  }
+`);
