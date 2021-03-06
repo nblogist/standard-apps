@@ -5,14 +5,19 @@
 import createRoutes from "@canvas-ui/apps-routing";
 import { Routes } from "@canvas-ui/apps-routing/types";
 import { media, Menu } from "@canvas-ui/react-components";
-import React, { useMemo } from "react";
+import React, { useMemo, useContext } from "react";
 import { Responsive } from "semantic-ui-react";
 import styled from "styled-components";
+import { Radio } from "semantic-ui-react";
 
 import { useTranslation } from "../translate";
 import Item from "./Item";
 import Settings from "./Settings";
 import Balance from "./Balance";
+import LogoLight from "../assets/images/standard-logo-navy.png";
+import LogoDark from "../assets/images/standard-logo.png";
+
+import { ThemeContext } from "../AppsWrapper";
 
 interface Props {
   className?: string;
@@ -25,6 +30,7 @@ interface Props {
 
 function SideBar({ className = "", handleResize, isCollapsed }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
+  const themeContext = useContext(ThemeContext);
 
   const routing = useMemo<Routes>(() => createRoutes(t), [t]);
   return (
@@ -34,7 +40,9 @@ function SideBar({ className = "", handleResize, isCollapsed }: Props): React.Re
     >
       <div className={`apps--SideBar ${isCollapsed ? "horizontal" : ""}`}>
         <div className="apps--Sidebar-logo-Wrapper">
-          <a className="apps--Sidebar-logo-text">{"Stable Coin"}</a>
+          <a className="apps--Sidebar-logo">
+            <img className="logo" src={themeContext.isDark ? LogoDark : LogoLight} alt="logo" />
+          </a>
         </div>
         <Balance addr="0x3931h2837rIe9f82123123123" />
         <Menu secondary vertical={!isCollapsed}>
@@ -55,6 +63,12 @@ function SideBar({ className = "", handleResize, isCollapsed }: Props): React.Re
             </div>
           </div>
         </Menu>
+        <Radio
+          toggle
+          onChange={(e, { checked }) => {
+            themeContext.setDarkTheme(!checked);
+          }}
+        />
         {isCollapsed ? "" : <Settings />}
       </div>
     </Responsive>
@@ -68,8 +82,10 @@ export default React.memo(styled(SideBar)`
   min-width: 14.25rem;
   position: relative;
   z-index: 300;
-  box-shadow: var(--grey80) 0px 20px 20px 0px;
 
+  .logo {
+    width: 200px;
+  }
   .apps--Sidebar-logo-Wrapper {
     display: flex;
     justify-content: flex-start;
@@ -77,12 +93,10 @@ export default React.memo(styled(SideBar)`
     padding: 0 ${props => props.theme.paddings.xxxl};
     padding-top: ${props => props.theme.paddings.super};
     padding-bottom: ${props => props.theme.paddings.xl};
-    font-size: ${props => props.theme.fontSizes.xxxxl};
     font-family: Bebas Neue;
   }
 
-  .apps--Sidebar-logo-text {
-    color: ${props => props.theme.root.text} !important;
+  .apps--Sidebar-logo {
   }
 
   .apps--Sidebar-more {
@@ -101,7 +115,7 @@ export default React.memo(styled(SideBar)`
 
   .apps--SideBar {
     align-items: center;
-    background: #fff;
+    background: ${props => props.theme.backgroundsd};
     color: #000;
     box-sizing: border-box;
     display: flex;
@@ -146,11 +160,11 @@ export default React.memo(styled(SideBar)`
 
     .apps--SideBar-Item {
       align-self: flex-end;
-      font-size: 1rem;
       padding: 0 !important;
       position: relative;
       width: 100%;
       display: flex !important;
+      margin: 0 !important;
 
       // &:not(:last-child) {
       //   margin-bottom: 0.75rem;

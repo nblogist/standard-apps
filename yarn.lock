@@ -1385,6 +1385,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@canvas-ui/app-home@workspace:packages/page-home":
+  version: 0.0.0-use.local
+  resolution: "@canvas-ui/app-home@workspace:packages/page-home"
+  dependencies:
+    "@babel/runtime": ^7.10.2
+  languageName: unknown
+  linkType: soft
+
 "@canvas-ui/app-settings@workspace:packages/page-settings":
   version: 0.0.0-use.local
   resolution: "@canvas-ui/app-settings@workspace:packages/page-settings"
@@ -1446,6 +1454,7 @@ __metadata:
     css-loader: ^3.5.3
     empty: ^0.10.1
     file-loader: ^6.0.0
+    grommet-styles: ^0.2.0
     html-loader: ^1.1.0
     html-webpack-plugin: ^4.3.0
     markdown-loader: ^5.1.0
@@ -1462,6 +1471,17 @@ __metadata:
     webpack-cli: ^4.3.1
     webpack-dev-server: ^4.0.0-beta.0
     webpack-merge: ^5.7.3
+  languageName: unknown
+  linkType: soft
+
+"@canvas-ui/custom-components@workspace:packages/custom-components":
+  version: 0.0.0-use.local
+  resolution: "@canvas-ui/custom-components@workspace:packages/custom-components"
+  dependencies:
+    "@babel/runtime": ^7.10.2
+    "@types/memoizee": ^0.4.4
+    memoizee: ^0.4.14
+    react-sparklines: ^1.7.0
   languageName: unknown
   linkType: soft
 
@@ -5598,6 +5618,7 @@ __metadata:
     electron-builder: ^22.7.0
     electron-builder-notarize: ^1.1.2
     gh-pages: ^3.1.0
+    grommet-icons: ^4.5.0
     i18next-scanner: ^2.11.0
     react: ^16.13.1
     react-dom: ^16.13.1
@@ -9903,6 +9924,30 @@ fsevents@^1.2.7:
   dependencies:
     temp: ~0.4.0
   checksum: 83d3cfb541d93027319a139526b084250ca0322a16450908615038d3fa45170fecfa812fe2bac6ce42a64c27b72841761d6414685d09e7dd7534da2547cfdb5f
+  languageName: node
+  linkType: hard
+
+"grommet-icons@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "grommet-icons@npm:4.5.0"
+  dependencies:
+    grommet-styles: ^0.2.0
+  peerDependencies:
+    react: ">= 16.6.0"
+    react-dom: ">= 16.6.0"
+    styled-components: ">= 5.x"
+  checksum: 4c7df4358c85121c2166b363a13cfdae8c77351a75690ecff5cbc95a2a6fd4622f625a173ed7d0f1f98a09470b78880a9e7c84a210ad7964d01b8c0c2881d9e2
+  languageName: node
+  linkType: hard
+
+"grommet-styles@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "grommet-styles@npm:0.2.0"
+  peerDependencies:
+    react: ">= 16.4.1"
+    react-dom: ">= 16.4.1"
+    styled-components: ">= 4.X"
+  checksum: 562aa387ed98c5529df9cd4f78c3700d32c742b4d891991e27a547665e20dc96df1fff8837b4f4f3f393ac8f936c33258e5afd033330ecae6c106cbbeec7056f
   languageName: node
   linkType: hard
 
@@ -15278,7 +15323,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.5.8, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.5.10, prop-types@npm:^15.5.8, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -15797,6 +15842,18 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ">=15"
   checksum: 4437eaa9bab02d46a7d6ea4915731c1f31642d6c3e3f7b9f951f5c6a9a73f35d4deb43a2d6b4be85f27816a20de96c3b9a9239f4b7e9136742106794ad20e95c
+  languageName: node
+  linkType: hard
+
+"react-sparklines@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "react-sparklines@npm:1.7.0"
+  dependencies:
+    prop-types: ^15.5.10
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+  checksum: d47bcb46949bd7a007909f091a9c946a47b11b9f4e5a7ebc0a60ce2c513292499f1ea69008decccfc4e13864026a0eee7ab87d9bfa6469b035c71861a1ece619
   languageName: node
   linkType: hard
 

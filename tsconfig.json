@@ -20,6 +20,7 @@
       "@canvas-ui/app-settings/*": ["packages/page-settings/src/*"],
       "@canvas-ui/app-upload": ["packages/page-upload/src"],
       "@canvas-ui/app-upload/*": ["packages/page-upload/src/*"],
+      "@canvas-ui/custom-components": ["packages/custom-components/src"],
       "@canvas-ui/react-api": ["packages/react-api/src"],
       "@canvas-ui/react-api/*": ["packages/react-api/src/*"],
       "@canvas-ui/react-components": ["packages/react-components/src"],

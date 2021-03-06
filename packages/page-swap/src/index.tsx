@@ -6,8 +6,8 @@ import useCodes from "@canvas-ui/apps/useCodes";
 import { WithLoader } from "@canvas-ui/react-components";
 import React, { useMemo } from "react";
 import { ComponentProps } from "./types";
-import Swap from "./Swap";
 import styled from "styled-components";
+import { Swap } from "@canvas-ui/custom-components";
 
 function SwapApp({ basePath, navigateTo, className }: Props): React.ReactElement<Props> {
   const { allCodes, hasCodes, isLoading, updated } = useCodes();
@@ -27,24 +27,21 @@ function SwapApp({ basePath, navigateTo, className }: Props): React.ReactElement
   return (
     <main className={`swap--App ${className}`}>
       <WithLoader isLoading={isLoading}>
-        <Swap />{" "}
-        {/*<Switch>
-          <Route path={`${basePath}/new/:id?/:index?`}>
-            <New {...componentProps} />
-          </Route>
-          <Route path={`${basePath}/success/:address`}>
-            <Success {...componentProps} />
-          </Route>
-          <Route exact>
-            <Codes {...componentProps} />
-          </Route>
-        </Switch>*/}
+        <h1 className="home-section-header">Swap</h1>
+        <br />
+        <Swap />
       </WithLoader>
     </main>
   );
 }
 
 export default React.memo(styled(SwapApp)`
-  background: ${props => props.theme.farm.bg};
-  margin: ${props => props.theme.margins.ssuper};
+  max-width: none;
+  flex: 1 1 0;
+  padding-left: 32px;
+  padding-top: 32px;
+
+  h1 {
+    color: ${props => props.theme.theme1.colors.text};
+  }
 `);

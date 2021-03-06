@@ -10,13 +10,14 @@ import { Routes } from "./types";
 import swap from "./swap";
 import farm from "./farm";
 import collateralize from "./collateralize";
-
+import home from "./home";
 export default function create(t: <T = string>(key: string, text: string, options: { ns: string }) => T): Routes {
   return [
     // upload(t),
     // deploy(t),
     // execute(t),
     settings(t),
+    home(t),
     collateralize(t),
     swap(t),
     farm(t)

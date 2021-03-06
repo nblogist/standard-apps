@@ -8,21 +8,11 @@ import "semantic-ui-css/semantic.min.css";
 import "tippy.js/dist/tippy.css"; // optional
 import "@canvas-ui/react-components/i18n";
 
-import { Api } from "@canvas-ui/react-api";
-import Queue from "@canvas-ui/react-components/Status/Queue";
-import { BlockAuthors, Events } from "@canvas-ui/react-query";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
-import { HashRouter } from "react-router-dom";
 import store from "store";
-import { ThemeProvider } from "styled-components";
-import { ModalProvider } from "react-modal-hook";
 
-import theme from "./theme";
-
-import settings from "@polkadot/ui-settings";
-
-import Apps from "./Apps";
+import AppsWrapper from "./AppsWrapper";
 
 const rootId = "root";
 const rootElement = document.getElementById(rootId);
@@ -41,21 +31,7 @@ store.each((_, key): void => {
 
 ReactDOM.render(
   <Suspense fallback="...">
-    <ThemeProvider theme={theme}>
-      <Queue>
-        <Api url={settings.apiUrl}>
-          <BlockAuthors>
-            <Events>
-              <HashRouter>
-                <ModalProvider>
-                  <Apps />
-                </ModalProvider>
-              </HashRouter>
-            </Events>
-          </BlockAuthors>
-        </Api>
-      </Queue>
-    </ThemeProvider>
+    <AppsWrapper />
   </Suspense>,
   rootElement
 );

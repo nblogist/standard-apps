@@ -104,7 +104,6 @@ export default React.memo(styled(Content)`
   overflow-y: auto;
   position: relative;
   width: 100%;
-  background: ${props => props.theme.root.bg};
 
   &.isLoading {
     display: flex;

@@ -115,45 +115,43 @@ export default React.memo(styled(Apps)`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
+  background: ${props => props.theme.background};
 
   &.theme--default {
     a.apps--SideBar-Item-NavLink {
-      font-size: ${props => props.theme.fontSizes.base};
-      color: ${props => props.theme.sidebar.item.text};
-      padding: ${props => props.theme.paddings.xxxxl};
+      font-size: 16px;
+      color: ${props => props.theme.textlight};
+      padding: 16px;
       white-space: nowrap;
       flex: 1;
       width: 100%;
-      border-left: ${props => props.theme.sidebar.item.borderSize} solid transparent;
+      margin: 12px 24px;
+      border-radius: 12px;
 
       .svg-inline--fa {
-        font-size: ${props => props.theme.fontSizes.lg};
-        margin-right: ${props => props.theme.margins.base};
-        color: ${props => props.theme.sidebar.item.icon};
+        font-size: 18px;
+        margin-right: 16px;
+        color: ${props => props.theme.textlight};
       }
 
       &:hover {
-        background: ${props => props.theme.sidebar.hover.bg};
-        // color: var(--grey80);
+        background: ${props => props.theme.backgroundlight};
 
         .svg-inline--fa {
-          // color: var(--grey80);
         }
       }
     }
 
     a.apps--SideBar-Item-NavLink-active {
-      background: ${props => props.theme.sidebar.selected.bg};
-      border-left: ${props => props.theme.sidebar.item.borderSize} solid ${props => props.theme.sidebar.selected.border} !important;
-      color: ${props => props.theme.sidebar.item.text};
-      background: ${props => props.theme.sidebar.selected.bg} // font-weight: 600;
-        .svg-inline--fa {
-        color: ${props => props.theme.sidebar.selected.icon};
+      color: ${props => props.theme.textsd};
+      font-size: 16px;
+      background: ${props => props.theme.highlight};
+
+      .svg-inline--fa {
+        color: ${props => props.theme.textsd};
       }
 
       &:hover {
-        // color: var(--grey80);
-        /* margin-right: 0; */
       }
     }
   }

@@ -2,12 +2,12 @@
 // and @canvas-ui/react-components authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import { css } from 'styled-components';
+import { css } from "styled-components";
 
-import { ELEV_2_CSS, ELEV_3_CSS } from './constants';
+import { ELEV_2_CSS, ELEV_3_CSS } from "./constants";
 
 /* highlighted buttons, orange */
-export const colorBtnHighlight = '#2477B3';
+export const colorBtnHighlight = "#2477B3";
 
 export default css`
   :root {
@@ -58,9 +58,9 @@ export default css`
       color: var(--grey80);
 
       &.dropdown {
-        border: none !important;
-        border-bottom-left-radius: 0 !important;
-        border-top-left-radius: 0 !important;
+        // border: none !important;
+        // border-bottom-left-radius: 0 !important;
+        // border-top-left-radius: 0 !important;
         ${ELEV_2_CSS}
 
         &:hover {

@@ -21,6 +21,7 @@ type iconsMapping = {
   [key: string]: string | Object;
 };
 const icons: iconsMapping = {
+  ["home"]: "home",
   ["swap"]: "retweet",
   ["farm"]: "gem",
   ["collateralize"]: { prefix: "fas", iconName: "university" }

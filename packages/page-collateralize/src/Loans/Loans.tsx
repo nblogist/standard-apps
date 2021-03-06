@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { BareProps as Props } from "@canvas-ui/react-components/types";
 import LoansTable from "./LoansTable";
 import { Modal } from "@canvas-ui/react-components";
+import { Button, Card, Image, Message } from "semantic-ui-react";
 import { useModal } from "react-modal-hook";
-
+import LoansDetail from "./LoansDetail";
 // interface MODAL_STATE {
 //   [key: string]: string;
 // }
@@ -15,33 +16,16 @@ interface LoansProps extends Props {}
 function Loans({ className = "" }: LoansProps): React.ReactElement<LoansProps> {
   const [modalState, setModalState] = useState(INITIAL_MODAL_STATE);
 
+  {
+    /* refactor modal content into one component*/
+  }
   const [showModal, hideModal] = useModal(() => {
     return (
       <Modal className="loans-modal" onClose={hideModal}>
-        <Modal.Header></Modal.Header>
         <Modal.Content>
-          <div>
-            <h1>Borrowed</h1>
-            <div>
-              <img src={modalState.image} />
-              <h1>{modalState.token}</h1>
-            </div>
-            <div>
-              <div>
-                <div>Interest Rate</div>
-                <small>{modalState.interesRate}</small>
-              </div>
-            </div>
-            <h1>Collateral</h1>
-            <div>
-              <img src={modalState.image} />
-              <h1>{modalState.token}</h1>
-            </div>
-          </div>
+          <LoansDetail details={modalState} />
         </Modal.Content>
-        <Modal.Actions cancelLabel={"close"} onCancel={hideModal}>
-          {""}
-        </Modal.Actions>
+        <Modal.Actions className="loans-modal-actions" cancelLabel={"close"} onCancel={hideModal}></Modal.Actions>
       </Modal>
     );
   }, [modalState]);

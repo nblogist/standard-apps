@@ -108,11 +108,9 @@ function inputToBn(
   maxValue?: BN
 ): [BN, boolean] {
   const [siPower, basePower, siUnitPower] = getSiPowers(si);
-  console.log("bjhl", siPower, basePower, siUnitPower);
 
   // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
   const isDecimalValue = input.match(/^(\d+)\.(\d+)$/);
-  console.log("bjhl-dec", isDecimalValue);
 
   let result;
 
@@ -145,7 +143,6 @@ function getValuesFromString(
 }
 
 function getValuesFromBn(valueBn: BN, si: SiDef | null): [string, BN, boolean] {
-  console.log("bjhl", si);
   const value = si
     ? valueBn.div(BN_TEN.pow(new BN(formatBalance.getDefaults().decimals + si.power))).toString()
     : valueBn.toString();

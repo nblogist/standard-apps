@@ -10,7 +10,7 @@ import { Route, Switch } from "react-router";
 import { ComponentProps } from "./types";
 import Process from "./Process";
 import CollateralizeTabs from "./CollateralizeTabs";
-import Loans from "./Loans";
+import Loans from "./Loans/Loans";
 
 const INITIAL_MODAL_STATE = {
   isOpen: false,
