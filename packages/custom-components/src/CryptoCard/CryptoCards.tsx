@@ -11,6 +11,7 @@ interface Props extends BareProps {
 
 function CryptoCards({ className, abbrs }: Props): React.ReactElement<Props> {
   const [data, setData] = useNomics(true, abbrs, null);
+  const [data2, setData2] = useNomics(true, abbrs, null, true);
 
   const renderCards = () => {
     return abbrs.map((abbr, index) => {
@@ -27,7 +28,8 @@ function CryptoCards({ className, abbrs }: Props): React.ReactElement<Props> {
                 circulatingSupply: data[index].circulating_supply,
                 marketCap: data[index].market_cap,
                 high: data[index].high,
-                priceChange: data[index]["1d"].price_change
+                priceChange: data[index]["1d"].price_change,
+                prices: data2 !== null && data2[index].prices
               })}
         />
       );
@@ -41,11 +43,14 @@ export default React.memo(styled(CryptoCards)`
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  gap: 24px;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  .crypto-card--Wrapper {
+    margin-right: 32px;
   }
 `);

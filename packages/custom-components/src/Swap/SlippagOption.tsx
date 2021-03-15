@@ -54,7 +54,6 @@ function SlippageOption({ className, onValueSelect, max = 100 }: Props): React.R
       </div>
       {openCustom && (
         <>
-          <br />
           <CustomSlippage onValueChange={onValueSelect} max={100} />
         </>
       )}
@@ -64,31 +63,36 @@ function SlippageOption({ className, onValueSelect, max = 100 }: Props): React.R
 
 export default React.memo(styled(SlippageOption)`
   .slippage-btns {
-    gap: 6px;
-    display: flex;
+    background: ${props => props.theme.backgroundlight};
+    display: inline-flex;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 4px;
+    margin-bottom: 12px;
   }
 
   .slippage-btn {
-    background: #fff;
-    border: 1px solid ${props => props.theme.theme1.colors.light3};
-    border-radius: 4px;
-    padding: 6px;
+    background: transparent;
+    border: 0;
+    padding: 12px;
     outline: 0;
     cursor: pointer;
+    color: ${props => props.theme.textlight};
+    border-radius: 8px;
   }
 
   .slippage-btn-active {
-    background: ${props => props.theme.theme1.colors.warning2};
-    border: 1px solid transparent;
-    color: #fff;
+    background: ${props => props.theme.highlight};
+    color: ${props => props.theme.textswapotions};
   }
 
   input {
-    padding: 8px;
+    padding: 16px;
+    color: ${props => props.theme.text};
     border: 0;
-    border-bottom: 1px solid ${props => props.theme.theme1.colors.light3};
-    color: ${props => props.theme.theme1.colors.text};
     outline: 0;
     font-size: 14px;
+    border-radius: 12px;
+    background: ${props => props.theme.backgroundlight};
   }
 `);

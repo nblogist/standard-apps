@@ -4,7 +4,7 @@
 
 import { getSystemChainColor } from "@canvas-ui/apps-config/ui";
 import { defaultColor } from "@canvas-ui/apps-config/ui/general";
-import { ScrollToTop } from "@canvas-ui/react-components";
+import { ScrollToTop, Modal } from "@canvas-ui/react-components";
 import GlobalStyle from "@canvas-ui/react-components/styles";
 import { BareProps as Props } from "@canvas-ui/react-components/types";
 import { useApi } from "@canvas-ui/react-hooks";
@@ -17,10 +17,6 @@ import Content from "./Content";
 import SideBar from "./SideBar";
 import WarmUp from "./WarmUp";
 import GlobalStyle2 from "./globalStyle";
-
-// polkadot js test
-import { testTx } from "./PolkaDot";
-//
 
 interface SidebarState {
   isCollapsed: boolean;
@@ -36,12 +32,6 @@ function saveSidebar(sidebar: SidebarState): SidebarState {
 }
 
 function Apps({ className = "" }: Props): React.ReactElement<Props> {
-  // polkadot js text
-  // (async () => {
-  //   await testTx;
-  // })();
-  //
-
   const { systemChain, systemName } = useApi();
   const [sidebar, setSidebar] = useState<SidebarState>({
     // bjhl, inital collapse based on window.innerwidth

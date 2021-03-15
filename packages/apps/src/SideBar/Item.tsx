@@ -24,7 +24,8 @@ const icons: iconsMapping = {
   ["home"]: "home",
   ["swap"]: "retweet",
   ["farm"]: "gem",
-  ["collateralize"]: { prefix: "fas", iconName: "university" }
+  ["collateralize"]: { prefix: "fas", iconName: "university" },
+  ["vault"]: "gem"
 };
 
 function Item({ isCollapsed, onClick, route }: Props): React.ReactElement<Props> | null {

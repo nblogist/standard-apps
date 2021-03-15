@@ -14,12 +14,6 @@ interface Props extends BareProps {
 }
 
 const COLLATERAL_OPTIONS = [
-  { text: "BTC", value: "BTC" },
-  { text: "DOT", value: "DOT" },
-  { text: "ETH", value: "ETH" }
-];
-
-const coinOptions = [
   {
     key: "BTC",
     text: "BTC",
@@ -54,17 +48,12 @@ function Swap({ className, abbr = "" }: Props): React.ReactElement<Props> {
         </div>
         <DropdownInput options={COLLATERAL_OPTIONS} def={0} onValueChange={onInput1Change} values={input1} max={1200} />
       </div>
-      <br />
-      <br />
       <div>
         <div className="swap-section-header swap-section-header2">Receive</div>
         <DropdownInput options={COLLATERAL_OPTIONS} def={0} onValueChange={onInput2Change} values={input2} max={600} />
 
         {/* <UnitInput unit={"MTR"} onValueChange={onInput2Change} values={input2} max={600} /> */}
       </div>
-
-      <br />
-      <br />
       <SlippageOptions />
       <br />
       <Button>Swap</Button>
@@ -77,6 +66,7 @@ export default React.memo(styled(Swap)`
   display: inline-block;
   padding: 24px;
   ${props => props.theme.glassmorphismCard}
+  background: ${props => props.theme.backgroundcard2};
 
   .balance-input--Wrapper {
     input {
@@ -100,6 +90,7 @@ export default React.memo(styled(Swap)`
   }
 
   .swap-section-header2 {
+    margin-top: 32px;
     margin-bottom: 12px;
   }
 
@@ -112,7 +103,11 @@ export default React.memo(styled(Swap)`
   .custom-button--Wrapper {
     border-radius: 8px;
     border: 0;
-    padding: 8px 16px;
-    background: ${props => props.theme.theme1.colors.success};
+    padding: 16px 16px;
+    width: 100%;
+    color: ${props => props.theme.textswapotions};
+  }
+  .slippage--Wrapper {
+    margin-top: 32px;
   }
 `);

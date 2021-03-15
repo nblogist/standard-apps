@@ -18,7 +18,7 @@ export default function toAddress (value?: string | Uint8Array | null): string |
         : keyring.decodeAddress(value)
     );
   } catch (error) {
-    console.error('Unable to encode address', value);
+    // console.error('Unable to encode address', value);
   }
 
   return address;

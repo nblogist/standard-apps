@@ -8,8 +8,7 @@ import React, { useMemo } from "react";
 import { Route, Switch } from "react-router";
 import styled from "styled-components";
 import { ComponentProps } from "./types";
-import TableTabs from "./TableTabs";
-import Table from "./Table";
+import { Farm } from "@canvas-ui/custom-components";
 
 function FarmApp({ basePath, navigateTo, className = "" }: Props): React.ReactElement<Props> {
   const { allCodes, hasCodes, isLoading, updated } = useCodes();
@@ -29,19 +28,9 @@ function FarmApp({ basePath, navigateTo, className = "" }: Props): React.ReactEl
   return (
     <main className={`farm--App ${className}`}>
       <WithLoader isLoading={isLoading}>
-        <TableTabs basePath={basePath} />
         <Switch>
-          <Route path={`${basePath}/standard-bar`}>
-            <Table />
-          </Route>
-          <Route path={`${basePath}/permanent`}>
-            <Table />
-          </Route>
-          <Route path={`${basePath}/onsen`}>
-            <Table />
-          </Route>
           <Route exact>
-            <Table />
+            <Farm />
           </Route>
         </Switch>
       </WithLoader>
@@ -51,9 +40,8 @@ function FarmApp({ basePath, navigateTo, className = "" }: Props): React.ReactEl
 
 // bjhl, refactor table to its own module
 export default React.memo(styled(FarmApp)`
-  background: ${props => props.theme.farm.bg};
-  border-radius: ${props => props.theme.generals.xs};
-  box-shadow: var(--grey80) 0px 0px 21px;
-  border: 1px solid ${props => props.theme.farm.border};
-  margin: ${props => props.theme.margins.ssuper};
+  max-width: none;
+  flex: 1 1 0;
+  padding-left: 32px;
+  padding-top: 32px;
 `);

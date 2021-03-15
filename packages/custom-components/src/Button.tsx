@@ -13,8 +13,9 @@ function Button({ className, children }: Props): React.ReactElement<Props> {
 
 export default React.memo(styled(Button)`
   padding: 8px;
-  background: ${props => props.theme.theme1.colors.highlight2};
-  color: #fff;
+  background: ${props => props.theme.highlight};
+  color: ${props => props.theme.text};
+  font-size: 16px;
   outline: 0;
   cursor: pointer;
 `);

@@ -52,11 +52,6 @@ function InputAddressSimple ({ autoFocus, children, className = '', defaultValue
       >
         {children}
       </Input>
-      <IdentityIcon
-        className='ui--InputAddressSimpleIcon'
-        size={32}
-        value={address}
-      />
     </div>
   );
 }
@@ -64,12 +59,4 @@ function InputAddressSimple ({ autoFocus, children, className = '', defaultValue
 export default React.memo(styled(InputAddressSimple)`
   position: relative;
 
-  .ui--InputAddressSimpleIcon {
-    background: #eee;
-    border: 1px solid #888;
-    border-radius: 50%;
-    left: 0.75rem;
-    position: absolute;
-    top: 1rem;
-  }
 `);

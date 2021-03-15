@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { BareProps as Props } from "@canvas-ui/react-components/types";
 import BalanceInput, { Values } from "./index";
 import { Dropdown } from "@canvas-ui/react-components";
+import DropDown from "../DropDown";
 
 interface DropdownInputProps extends Props {
   max: number;
@@ -32,7 +33,7 @@ function DropdownInput({
       <button className="dropdown-input-max" onClick={onMaxClick}>
         MAX
       </button>
-      <Dropdown defaultValue={options[def].value} options={options} isButton={true} onChange={onDrodpDownChange} />
+      <DropDown menu={options} onChange={onDrodpDownChange} />
     </div>
   );
 }
@@ -54,6 +55,7 @@ export default React.memo(styled(DropdownInput)`
     background: transparent;
     outline: none;
     cursor: pointer;
+    margin-right: 8px;
   }
 
   .balance-input--Wrapper {

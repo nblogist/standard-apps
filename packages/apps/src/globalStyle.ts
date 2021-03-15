@@ -33,12 +33,12 @@ const GlobalStyle = createGlobalStyle`
   }
   
   .ui.placeholder {
-    background-image: linear-gradient(
-      to right,
-      rgba(19,21,35, 0.01) 0,
-      rgba(19,21,35, 0.15) 15%,
-      rgba(19,21,35, 0.01) 30%
-    );
+    // background-image: linear-gradient(
+    //   to right,
+    //   rgba(19,21,35, 0.01) 0,
+    //   rgba(19,21,35, 0.15) 15%,
+    //   rgba(19,21,35, 0.01) 30%
+    // );
   }
 `;
 

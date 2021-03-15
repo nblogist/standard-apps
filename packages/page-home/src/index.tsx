@@ -7,7 +7,7 @@ import { WithLoader } from "@canvas-ui/react-components";
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 import { Route, Switch } from "react-router";
-import { CryptoCards, Swap, Farm } from "@canvas-ui/custom-components";
+import { CryptoCards, Swap, Farm, Scroller, News } from "@canvas-ui/custom-components";
 
 function HomeApp({ basePath, navigateTo, className = "" }: Props): React.ReactElement<Props> {
   const { allCodes, hasCodes, isLoading, updated } = useCodes();
@@ -22,19 +22,24 @@ function HomeApp({ basePath, navigateTo, className = "" }: Props): React.ReactEl
             </div> */}
             <div>
               <div className="blurry" />
-              <div className="blurr2" />
+              <div className="blurry2" />
               <h1 className="home-section-header">Available as Collaterals</h1>
               <CryptoCards abbrs={["DOT", "BTC", "ETH", "DAO", "USDT"]} />
-              <br />
-              <div className="home-section">
-                <div>
-                  <h1 className="home-section-header">Swap</h1>
-                  <Swap />
-                </div>
-                <div>
+              <Scroller classNames="home-section">
+                <div className="home-subsection" style={{ flex: "1 1 0" }}>
                   <h1 className="home-section-header">Top Liquidty Pairs</h1>
                   <Farm />
                 </div>
+                <div className="home-subsection">
+                  <h1 className="home-section-header">Swap</h1>
+                  <Swap />
+                </div>
+              </Scroller>
+              <h1 className="home-section-header">News</h1>
+              <div>
+                <News />
+                <News />
+                <News />
               </div>
             </div>
           </Route>
@@ -54,7 +59,7 @@ export default React.memo(styled(HomeApp)`
     position: absolute;
     width: 308.46px;
     height: 326.36px;
-    left: 743.29px;
+    left: 843.29px;
     top: 126.04px;
 
     background: conic-gradient(
@@ -72,8 +77,8 @@ export default React.memo(styled(HomeApp)`
     position: absolute;
     width: 266.1px;
     height: 564.89px;
-    left: 667px;
-    // top: 361.04px;
+    left: 567px;
+    top: 161.04px;
 
     background: linear-gradient(347.31deg, rgba(255, 0, 156, 0.8) -22.31%, rgba(67, 159, 188, 0.8) 92.99%);
     filter: blur(180px);
@@ -91,7 +96,11 @@ export default React.memo(styled(HomeApp)`
 
   .home-section {
     display: flex;
-    gap: 30px;
     flex-wrap: nowrap;
+    margin-top: 20px;
+  }
+
+  .home-subsection {
+    margin-right: 32px;
   }
 `);

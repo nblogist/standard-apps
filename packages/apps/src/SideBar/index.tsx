@@ -1,7 +1,7 @@
 // Copyright 2017-2021 @polkadot/apps authors & contributors
 // and @canvas-ui/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
-
+import { truncate } from "@canvas-ui/react-util";
 import createRoutes from "@canvas-ui/apps-routing";
 import { Routes } from "@canvas-ui/apps-routing/types";
 import { media, Menu } from "@canvas-ui/react-components";
@@ -9,11 +9,10 @@ import React, { useMemo, useContext } from "react";
 import { Responsive } from "semantic-ui-react";
 import styled from "styled-components";
 import { Radio } from "semantic-ui-react";
-
+import { useCurrentUserContext } from "@canvas-ui/custom-components";
 import { useTranslation } from "../translate";
 import Item from "./Item";
 import Settings from "./Settings";
-import Balance from "./Balance";
 import LogoLight from "../assets/images/standard-logo-navy.png";
 import LogoDark from "../assets/images/standard-logo.png";
 
@@ -31,6 +30,8 @@ interface Props {
 function SideBar({ className = "", handleResize, isCollapsed }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const themeContext = useContext(ThemeContext);
+  const { currentAddress, getAccount } = useCurrentUserContext();
+  const currentAccount = useMemo(() => getAccount(currentAddress), [getAccount, currentAddress]);
 
   const routing = useMemo<Routes>(() => createRoutes(t), [t]);
   return (
@@ -44,7 +45,17 @@ function SideBar({ className = "", handleResize, isCollapsed }: Props): React.Re
             <img className="logo" src={themeContext.isDark ? LogoDark : LogoLight} alt="logo" />
           </a>
         </div>
-        <Balance addr="0x3931h2837rIe9f82123123123" />
+        <div style={{ color: "white" }}>
+          {currentAddress ? (
+            <>
+              <div>{currentAccount !== undefined && currentAccount.name}</div>
+              <div className="address">{truncate(currentAddress, 8)}</div>{" "}
+            </>
+          ) : (
+            <div>Install Polkadot JS</div>
+          )}
+        </div>
+
         <Menu secondary vertical={!isCollapsed}>
           <div className={isCollapsed ? "apps--SideBar-collapse" : `apps--SideBar-Scroll`}>
             {routing.map(

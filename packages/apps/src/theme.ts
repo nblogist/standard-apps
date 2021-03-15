@@ -173,7 +173,9 @@ const device = {
 
 const darkTheme = {
   text: "#fff",
+  textwhite: '#fff',
   textsd: "#fff",
+  textswapotions: "#fff",
   textlight: "#bab8c0",
   textlink: "#31a6f4",
   textwallet: "#fff",
@@ -182,14 +184,27 @@ const darkTheme = {
   backgroundlight: "#281f40",
   backgroundlight2: "rgba(97,67,198,0.13)",
   backgroundwallet: "rgba(97, 67, 188, 0.13)",
+  backgroundcard: "rgba(31, 24, 51, 0.7)",
+  backgroundcard2: "rgba(31, 24, 51, 0.6)",
   highlight: "#6143bc",
+  highlight2: "#B5267D",
   green: "#6FCF97",
   red: "#EB5757",
-  glassmorphismCard: `background: linear-gradient(136.45deg, rgba(31, 24, 51, 0.6) 23.59%, rgba(31, 24, 51, 0) 179.98%);
-  border: 1px solid #3E3358;
-  box-sizing: border-box;
-  backdrop-filter: blur(20px);  
-  border-radius: 20px;`,
+  modalCard: `background: linear-gradient(23.12deg, rgba(96, 95, 148, 0.36) 2.05%, rgba(245, 244, 255, 0.12) 104.3%) !important;
+  border: 1px solid rgba(171,158,249,0.8) !important;
+  backdrop-filter: blur(110px) !important;
+  border-radius: 20px !important;`,
+  glassmorphismCard: `background: linear-gradient(136.45deg, rgba(31, 24, 51, 0.6) 23.59%, rgba(31, 24, 51, 0) 179.98%) !important;
+  border: 1px solid #3E3358 !important;
+  box-sizing: border-box !important;
+  backdrop-filter: blur(20px) !important;  
+  border-radius: 20px !important;`,
+  glassmorphismCard2:`background: rgba( 255, 255, 255, 0.4 ) !important;
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 )!important;
+  backdrop-filter: blur( 4px ) !important;
+  -webkit-backdrop-filter: blur( 4px ) !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;`,
   theme1,
   paddings,
   margins,
@@ -204,7 +219,9 @@ const darkTheme = {
 
 const lightTheme = {
   text: "#111123",
+  textwhite: '#fff',
   textsd: "#fff",
+  textswapotions: "#fff",
   textlink: "#31a6f4",
   textlight: "#65657f",
   textwallet: "#6143bc",
@@ -213,14 +230,27 @@ const lightTheme = {
   backgroundlight: "#f0eff7",
   backgroundlight2: "rgba(97,67,198,0.13)",
   backgroundwallet: "rgba(97, 67, 188, 0.13)",
+  backgroundcard1: "rgba(255, 255, 255, 0.7)",
+  backgroundcard2: "rgba(255, 255, 255, 0.6)",
   highlight: "#6143bc",
+  highlight2: "#B5267D",
   green: "#6FCF97",
   red: "#EB5757",
-  glassmorphismCard: `background: linear-gradient(136.45deg, rgba(255, 255, 255, 0.7) 23.59%, rgba(255, 255, 255, 0) 179.98%);
-  border: 1px solid #FFFFFF;
-  box-sizing: border-box;
-  backdrop-filter: blur(20px);
-  border-radius: 20px;`,
+  modalCard: `background: linear-gradient(45deg, rgba(96,95,148,0.6), rgba(245,244,255,0.2)) !important;
+  border: 1px solid rgba(171,158,249,0.8) !important;
+  border-radius: 20px !important;`,
+  glassmorphismCard: `background: linear-gradient(136.45deg, rgba(255, 255, 255, 0.7) 23.59%, rgba(255, 255, 255, 0) 179.98%) !important;
+  border: 1px solid #FFFFFF !important;
+  box-sizing: border-box !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 20px !important;`,
+  glassmorphismCard2:`background: rgba( 255, 255, 255, 0.45 ) !important;
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 )!important;
+  backdrop-filter: blur( 4px ) !important;
+  -webkit-backdrop-filter: blur( 4px ) !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
+  `,
   theme1,
   paddings,
   margins,

@@ -16,6 +16,7 @@ import { HashRouter } from "react-router-dom";
 import store from "store";
 import { ThemeProvider } from "styled-components";
 import { ModalProvider } from "react-modal-hook";
+import { UserContextHOC } from "@canvas-ui/custom-components";
 
 import theme from "./theme";
 
@@ -51,7 +52,9 @@ const AppsWrapper = () => {
               <Events>
                 <HashRouter>
                   <ModalProvider>
-                    <Apps />
+                    <UserContextHOC>
+                      <Apps />
+                    </UserContextHOC>
                   </ModalProvider>
                 </HashRouter>
               </Events>

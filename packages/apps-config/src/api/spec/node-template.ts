@@ -6,6 +6,6 @@
 /* eslint-disable sort-keys */
 
 export default {
-  Address: 'AccountId',
-  LookupSource: 'AccountId'
+  Address: "MulitAddress",
+  LookupSource: "MulitAddress"
 };

@@ -22,7 +22,7 @@ function UnitInput({
   };
 
   return (
-    <div className={`${className} dropwdown-input--Wrapper`}>
+    <div className={`${className} unit-input--Wrapper`}>
       <BalanceInput onValueChange={onValueChange} values={values} max={max} />
       <button className="unit-input-max" onClick={onMaxClick}>
         MAX

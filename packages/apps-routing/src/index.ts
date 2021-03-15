@@ -11,6 +11,7 @@ import swap from "./swap";
 import farm from "./farm";
 import collateralize from "./collateralize";
 import home from "./home";
+import vault from "./vault";
 export default function create(t: <T = string>(key: string, text: string, options: { ns: string }) => T): Routes {
   return [
     // upload(t),
@@ -18,6 +19,7 @@ export default function create(t: <T = string>(key: string, text: string, option
     // execute(t),
     settings(t),
     home(t),
+    vault(t),
     collateralize(t),
     swap(t),
     farm(t)

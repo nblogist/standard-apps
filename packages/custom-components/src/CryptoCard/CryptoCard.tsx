@@ -2,7 +2,9 @@ import { classes } from "@canvas-ui/react-util";
 import React from "react";
 import styled from "styled-components";
 import { BareProps } from "@canvas-ui/react-components/types";
-import { Placeholder as SUIPlaceholder } from "semantic-ui-react";
+import { Sparklines, SparklinesLine } from "react-sparklines";
+import CryptoCardPlaceholder from "./CryptoCardPlaceholder";
+import { Segment, Loader } from "semantic-ui-react";
 
 interface Props extends BareProps {
   abbr: string;
@@ -14,6 +16,7 @@ interface Props extends BareProps {
   loading: boolean;
   name: string;
   priceChange: string;
+  prices: Array<string>;
 }
 
 function CryptoCard({
@@ -26,25 +29,59 @@ function CryptoCard({
   marketCap,
   high,
   loading = false,
-  priceChange = ""
+  priceChange = "",
+  prices = []
 }: Props): React.ReactElement<Props> {
-  const formatPrice = (val: string) => {
+  const formatPrice = (val: string, cutoff = true) => {
     const _val = val.split(".");
     if (_val[0].startsWith("-")) {
       _val[0] = `-$${_val[0].substring(1)}`;
-      return _val[0] + "." + _val[1].substr(0, 2);
+      return _val[0] + "." + _val[1].substr(0, cutoff ? 2 : undefined);
     }
-    return "$" + _val[0] + "." + _val[1].substr(0, 2);
+    return "$" + _val[0] + "." + _val[1].substr(0, cutoff ? 2 : undefined);
+  };
+
+  // useMemo
+  const renderPriceChange = () => {
+    const _priceChange = parseFloat(priceChange);
+    return (
+      <div
+        className={classes(
+          "crypto-change",
+          `${_priceChange > 0 ? "crypto-change-up" : _priceChange == 0 ? "crypto-change-normal" : "crypto-change-down"}`
+        )}
+      >
+        {formatPrice(priceChange, false)}
+      </div>
+    );
+  };
+
+  const renderPriceChart = () => {
+    const _priceChange = parseFloat(priceChange);
+
+    return (
+      <div className="crypto-chart">
+        <Sparklines data={prices.length > 0 ? prices : ["0", "0", "0", "0", "0"]}>
+          <SparklinesLine
+            className="crypto-sparkline"
+            color={_priceChange > 0 ? "#6FCF97" : _priceChange == 0 ? "#bab8c0" : "#EB5757"}
+          />
+        </Sparklines>
+      </div>
+    );
+    return (
+      <Segment className="crypto-card-chart-segment">
+        <Loader size="small" />
+      </Segment>
+    );
   };
 
   return (
     <div className={classes(className, "crypto-card--Wrapper")}>
       {loading ? (
-        <SUIPlaceholder className="crypto-card-placeholder">
-          <SUIPlaceholder.Image />
-        </SUIPlaceholder>
+        <CryptoCardPlaceholder />
       ) : (
-        <div className={classes(className, "crypto-card-container")}>
+        <>
           <div className="crypto-image-container">
             <div className="crypto-image-bg" />
             <div className="crypto-image-bg2" />
@@ -54,41 +91,43 @@ function CryptoCard({
             {name} - {abbr}
           </h1>
           <div className="crypto-value">{formatPrice(value)}</div>
-          <div
-            className={classes(
-              "crypto-change",
-              `${
-                parseFloat(priceChange) > 0
-                  ? "crypto-change-up"
-                  : parseFloat(priceChange) == 0.0
-                  ? "crypto-change-normal"
-                  : "crypto-change-down"
-              }`
-            )}
-          >
-            {formatPrice(priceChange)}
+          <div className="crypto-price-info">
+            {renderPriceChange()}
+            {renderPriceChart()}
           </div>
-          <div className="crypto-extra-info">
+          {/*<div className="crypto-extra-info">
             <div className="crypto-info-header">Circ. Supply</div>
             <div className="crypto-info-text">{circulatingSupply || "N/A"}</div>
             <div className="crypto-info-header">Market Cap</div>
             <div className="crypto-info-text">{marketCap || "N/A"}</div>
             <div className="crypto-info-header">High</div>
             <div className="crypto-info-text">{high || "N/A"}</div>
-          </div>
-        </div>
+            </div>*/}
+        </>
       )}
     </div>
   );
 }
 
 export default React.memo(styled(CryptoCard)`
+  min-height: 256px;
+  padding: 24px;
+  min-width: 248px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  ${props => props.theme.glassmorphismCard}
 
-  min-width: 248px;
+  .crypto-price-info {
+    text-align: center;
+  }
+
+  .crypto-chart {
+    width: 100px;
+    height: 20px;
+    margin-top: 16px;
+  }
 
   .crypto-name {
     font-size: 14px;
@@ -151,21 +190,19 @@ export default React.memo(styled(CryptoCard)`
     left: 0;
   }
 
-  .crypto-card-placeholder {
-    width: 200px;
-    height: 256px;
-    border-radius: 8px;
-  }
-
   .crypto-card-container {
     min-height: 256px;
     padding: 24px;
-    background: #fff;
-    ${props => props.theme.glassmorphismCard}
+    min-width: 248px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .crypto-info-header {
-    color: ${props => props.theme.text};
+    color: ${props => props.theme.textlight};
   }
 
   .crypto-info-text {
@@ -196,5 +233,26 @@ export default React.memo(styled(CryptoCard)`
 
   .crypto-change-down {
     color: ${props => props.theme.red} !important;
+  }
+
+  crypto-sparkline {
+    fill: #000 !important ;
+  }
+
+  .ui.loader {
+    display: block;
+  }
+
+  .ui.loader:before {
+    // border: ${props => props.theme.backgroundlight};
+  }
+
+  .ui.loader:after{
+    border-color ${props => props.theme.highlight} transparent transparent;
+  }
+
+  .crypto-card-chart-segment {
+    border: 0;
+    box-shadow:none;
   }
 `);
