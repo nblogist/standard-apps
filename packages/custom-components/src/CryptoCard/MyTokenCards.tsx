@@ -2,9 +2,12 @@ import { classes } from "@canvas-ui/react-util";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BareProps } from "@canvas-ui/react-components/types";
+import { useApi } from "@canvas-ui/react-hooks";
+import { useCurrentUser } from "@canvas-ui/custom-components";
 
-import useAccount from '../useAccount';
+import useAccount from "../useAccount";
 import MyTokenCard from "./MyTokenCard";
+import { api } from "@canvas-ui/react-api";
 
 interface Props extends BareProps {
   abbrs: Array<string>;
@@ -12,14 +15,24 @@ interface Props extends BareProps {
 
 function MyTokenCards({ className, abbrs }: Props): React.ReactElement<Props> {
   const [data, setData] = useState<any>({});
-  const [getBalance] = useAccount();
-  
-  useEffect(() => {
-    getBalance().then((res)=> {setData({...data, stnd: {name: 'Standard', abbr:'STND', image: 'https://i.imgur.com/efse8KH.png',amt: res.free.toHuman() }})}).catch(err => {
-      console.log('err', err);
-    })
-  },[])
+  const api = useApi().api;
+  const currentUserAccount = useCurrentUser();
 
+  useEffect(() => {
+    if (currentUserAccount.currentAddress !== "") {
+      api.query.balances
+        .account(currentUserAccount.currentAddress)
+        .then(res => {
+          console.log(res.free.toNumber(), res.free.toHuman(), res.free.toString());
+          setData({
+            ...data,
+            stnd: { name: "Standard", abbr: "STND", image: "https://i.imgur.com/efse8KH.png", amt: res.free.toNumber() }
+          });
+          console.log(res);
+        })
+        .catch(err => console.log(err));
+    }
+  }, [currentUserAccount.currentAddress]);
 
   const renderCards = () => {
     return Object.keys(data).map((abbr, index) => {
