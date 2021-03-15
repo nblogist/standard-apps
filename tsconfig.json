@@ -26,6 +26,8 @@
       "@canvas-ui/app-farm/*": ["packages/page-farm/src/*"],
       "@canvas-ui/app-home": ["packages/page-home/src"],
       "@canvas-ui/app-home/*": ["packages/page-home/src/*"],
+      "@canvas-ui/app-vault": ["packages/page-vault/src"],
+      "@canvas-ui/app-vault/*": ["packages/page-vault/src/*"],
       "@canvas-ui/app-collateralize": ["packages/page-collateralize/src"],
       "@canvas-ui/app-collateralize/*": ["packages/page-collateralize/src/*"],
       "@canvas-ui/custom-components": ["packages/custom-components/src"],
