@@ -7,5 +7,6 @@
 
 export default {
   Address: "MulitAddress",
-  LookupSource: "MulitAddress"
+  LookupSource: "MulitAddress",
+  BlockLength: "U64"
 };
