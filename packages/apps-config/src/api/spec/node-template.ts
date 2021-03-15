@@ -6,7 +6,7 @@
 /* eslint-disable sort-keys */
 
 export default {
-  Address: "MulitAddress",
-  LookupSource: "MulitAddress",
+  Address: "MultiAddress",
+  LookupSource: "MultiAddress",
   BlockLength: "U64"
 };
