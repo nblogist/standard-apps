@@ -2,7 +2,7 @@ import { classes, truncate } from "@canvas-ui/react-util";
 import React, { useEffect, useMemo } from "react";
 import styled from "styled-components";
 import { BareProps as Props } from "@canvas-ui/react-components/types";
-import { Modal, AccountName } from "@canvas-ui/react-components";
+import { Modal } from "@canvas-ui/react-components";
 import { CurrentUserContext, useCurrentUser } from "@canvas-ui/custom-components";
 import { useModal } from "react-modal-hook";
 import BaseIdentityIcon from "@polkadot/react-identicon";

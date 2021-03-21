@@ -3,56 +3,78 @@ import styled from "styled-components";
 import { BareProps as Props } from "@canvas-ui/react-components/types";
 import { useModal } from "react-modal-hook";
 import { Modal, InputAddressSimple } from "@canvas-ui/react-components";
-import useTransaction, {TransactionContext} from "./useTransaction";
-import UnitInput from './BalanceInput/UnitInput'
+import useTransaction, { TransactionContext } from "./useTransaction";
+import UnitInput from "./BalanceInput/UnitInput";
 import { Values, INITIAL_STATE } from "./BalanceInput";
+import { useApi } from "@canvas-ui/react-hooks";
 
+const _INITIAL_STATE = {
+  ...INITIAL_STATE,
+  update: true
+};
 
 function TransferHOC({ className, children }: Props): React.ReactElement<Props> {
-const [amount, setAmount] = useState<Values>(INITIAL_STATE)
-const [token, setToken] = useState('')
-const [addr, setAddr] = useState('')
+  const [amount, setAmount] = useState<Values>(_INITIAL_STATE);
+  const [token, setToken] = useState("");
+  const [addr, setAddr] = useState("");
+  const api = useApi().api;
   const [send] = useTransaction();
 
   const [showModal, hideModal] = useModal(() => {
     return (
       <Modal className={className} onClose={hideModal}>
         <Modal.Content className="tcm-content">
-            <h3 className="tcm-header">Send</h3>
-            <UnitInput onValueChange={onAmountChange} values={amount} unit={token}/>
+          <h3 className="tcm-header">Send</h3>
+          <UnitInput
+            onValueChange={onAmountChange}
+            values={amount}
+            unit={token}
+            chainDecimals={api.registry.chainDecimals}
+          />
 
-            <InputAddressSimple onChange={onAddrChange} className="tcm-address" label={<h3 className="tcm-header">To</h3>}/>
-            <div>
-              <button className="submit-btn" onClick={() => {
-                send(addr, amount.floatValue || 0)
+          <InputAddressSimple
+            onChange={onAddrChange}
+            className="tcm-address"
+            label={<h3 className="tcm-header">To</h3>}
+          />
+          <div>
+            <button
+              className="submit-btn"
+              onClick={() => {
+                console.log(amount);
+                send(addr, amount.bn || 0);
                 hideModal();
-              }}>Submit</button>
-              <button className="cancel-btn" onClick={hideModal}>Cancel</button>
-            </div>
+              }}
+            >
+              Submit
+            </button>
+            <button className="cancel-btn" onClick={hideModal}>
+              Cancel
+            </button>
+          </div>
         </Modal.Content>
       </Modal>
     );
-  }, [amount, token]);
+  }, [amount, token, api]);
 
   const onAmountChange = useCallback((values: Values) => {
     setAmount(values);
   }, []);
 
-  const onAddrChange = useCallback((addr:string) => {
+  const onAddrChange = useCallback((addr: string) => {
     setAddr(addr);
-  }, [])
+  }, []);
 
   useEffect(() => {
-    if (token !== '') showModal()
-  }, [token])
+    if (token !== "") showModal();
+  }, [token]);
 
   const initTransfer = (_token: string) => {
-    if (_token === token) showModal()
-    else setToken(_token)
-  }
+    if (_token === token) showModal();
+    else setToken(_token);
+  };
 
-
-  return <TransactionContext.Provider value={{send, initTransfer}}>{children}</TransactionContext.Provider>;
+  return <TransactionContext.Provider value={{ send, initTransfer }}>{children}</TransactionContext.Provider>;
 }
 
 export default React.memo(styled(TransferHOC)`

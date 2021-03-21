@@ -1,29 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { BareProps as Props } from "@canvas-ui/react-components/types";
 import BalanceInput, { Values } from "./index";
+import BN from "bn.js";
 
 interface UnitInputProps extends Props {
-  max: number;
+  max?: BN;
   onValueChange?: Function;
   unit: string;
   values: Values;
+  chainDecimals: number;
 }
 
 function UnitInput({
   className = "",
-  max = Number.MAX_VALUE,
+  max,
   onValueChange,
   unit,
-  values
+  values,
+  chainDecimals
 }: UnitInputProps): React.ReactElement<UnitInputProps> {
   const onMaxClick = () => {
-    onValueChange && onValueChange({ value: max.toString(), floatValue: max });
+    // onValueChange && onValueChange({ value: max.toString(), floatValue: max });
   };
 
   return (
     <div className={`${className} unit-input--Wrapper`}>
-      <BalanceInput onValueChange={onValueChange} values={values} max={max} />
+      <BalanceInput onValueChange={onValueChange} values={values} max={max} chainDecimals={chainDecimals} />
       <button className="unit-input-max" onClick={onMaxClick}>
         MAX
       </button>

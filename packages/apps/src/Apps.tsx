@@ -11,12 +11,15 @@ import { useApi } from "@canvas-ui/react-hooks";
 import React, { useCallback, useMemo, useState } from "react";
 import store from "store";
 import styled from "styled-components";
+import { ToastContainer } from "react-toastify";
 
 import { SIDEBAR_MENU_THRESHOLD, SideBarTransition } from "./constants";
 import Content from "./Content";
 import SideBar from "./SideBar";
 import WarmUp from "./WarmUp";
 import GlobalStyle2 from "./globalStyle";
+
+import "react-toastify/dist/ReactToastify.css";
 
 interface SidebarState {
   isCollapsed: boolean;
@@ -94,6 +97,15 @@ function Apps({ className = "" }: Props): React.ReactElement<Props> {
           toggleMenu={_toggleMenu}
         />
         <Content />
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          draggable
+        />
         <div id={PORTAL_ID} />
       </div>
       <WarmUp />

@@ -4,10 +4,8 @@ import styled from "styled-components";
 import { BareProps } from "@canvas-ui/react-components/types";
 import { useApi } from "@canvas-ui/react-hooks";
 import { useCurrentUser } from "@canvas-ui/custom-components";
-
-import useAccount from "../useAccount";
+import { BN_TEN, formatBalance, isBn } from "@polkadot/util";
 import MyTokenCard from "./MyTokenCard";
-import { api } from "@canvas-ui/react-api";
 
 interface Props extends BareProps {
   abbrs: Array<string>;
@@ -15,22 +13,25 @@ interface Props extends BareProps {
 
 function MyTokenCards({ className, abbrs }: Props): React.ReactElement<Props> {
   const [data, setData] = useState<any>({});
-  const api = useApi().api;
   const currentUserAccount = useCurrentUser();
 
   useEffect(() => {
     if (currentUserAccount.currentAddress !== "") {
-      api.query.balances
-        .account(currentUserAccount.currentAddress)
-        .then(res => {
-          console.log(res.free.toNumber(), res.free.toHuman(), res.free.toString());
+      currentUserAccount
+        .getUserBalance()
+        .then((res: any) => {
           setData({
             ...data,
-            stnd: { name: "Standard", abbr: "STND", image: "https://i.imgur.com/efse8KH.png", amt: res.free.toNumber() }
+            stnd: {
+              name: "Standard",
+              abbr: "STND",
+              image: "https://i.imgur.com/efse8KH.png",
+              amt: res
+            }
           });
           console.log(res);
         })
-        .catch(err => console.log(err));
+        .catch((err: Error) => console.log(err));
     }
   }, [currentUserAccount.currentAddress]);
 

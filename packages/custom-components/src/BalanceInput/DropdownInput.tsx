@@ -2,34 +2,36 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { BareProps as Props } from "@canvas-ui/react-components/types";
 import BalanceInput, { Values } from "./index";
-import { Dropdown } from "@canvas-ui/react-components";
 import DropDown from "../DropDown";
+import BN from "bn.js";
 
 interface DropdownInputProps extends Props {
-  max: number;
+  max?: BN;
   onValueChange?: Function;
   onDrodpDownChange?: Function;
   options: Array<any>;
   def: number;
   values: Values;
+  chainDecimals: number;
 }
 
 function DropdownInput({
   className = "",
-  max = Number.MAX_VALUE,
+  max,
   onValueChange,
   onDrodpDownChange,
   options,
   values,
-  def = 0
+  def = 0,
+  chainDecimals
 }: DropdownInputProps): React.ReactElement<DropdownInputProps> {
   const onMaxClick = () => {
-    onValueChange && onValueChange({ value: max.toString(), floatValue: max });
+    // onValueChange && onValueChange({ value: max.toString(), floatValue: max });
   };
 
   return (
     <div className={`${className} dropwdown-input--Wrapper`}>
-      <BalanceInput onValueChange={onValueChange} values={values} max={max} />
+      <BalanceInput onValueChange={onValueChange} values={values} max={max} chainDecimals={chainDecimals} />
       <button className="dropdown-input-max" onClick={onMaxClick}>
         MAX
       </button>

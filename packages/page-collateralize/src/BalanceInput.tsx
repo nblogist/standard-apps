@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import NumberFormat from "react-number-format";
 import { BareProps as Props } from "@canvas-ui/react-components/types";
+// import { inputToBn } from "@canvas-ui/custom-components/inputBn";
 
 interface Value {
   value: string;
@@ -22,6 +23,7 @@ function BalanceInput({
   values,
   classNames
 }: BalanceProps): React.ReactElement<BalanceProps> {
+  console.log("asdfs");
   return (
     <div className={`${className} balance-input--Wrapper ${classNames}`}>
       <NumberFormat
@@ -31,9 +33,10 @@ function BalanceInput({
         isNumericString={true}
         value={values.value}
         onValueChange={({ value, floatValue }) => {
-          if (floatValue === undefined) floatValue = 0;
-          else if (floatValue === Infinity || parseFloat(value) > max) value = max.toString();
-          onValueChange && onValueChange(value, floatValue);
+          console.log("vuechange", value);
+          const [result, validity] = inputToBn(value);
+          console.log("hello", result);
+          validity && onValueChange && onValueChange(value, floatValue);
           // setValue({ value, floatValue });
         }}
       />

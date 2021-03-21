@@ -26,7 +26,8 @@
     "react-modal-hook": "^3.0.0",
     "react-number-format": "^4.4.4",
     "react-placeholder": "^4.1.0",
-    "react-sparklines": "^1.7.0"
+    "react-sparklines": "^1.7.0",
+    "react-toastify": "^7.0.3"
   },
   "devDependencies": {
     "babel-loader": "^8.1.0",

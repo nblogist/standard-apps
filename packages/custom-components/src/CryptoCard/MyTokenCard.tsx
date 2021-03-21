@@ -2,9 +2,10 @@ import { classes } from "@canvas-ui/react-util";
 import React from "react";
 import styled from "styled-components";
 import { BareProps } from "@canvas-ui/react-components/types";
+import { TxButton } from "@canvas-ui/react-components";
 import CryptoCardPlaceholder from "./CryptoCardPlaceholder";
-import { useTransactionContext} from '@canvas-ui/custom-components';
-
+import { useTransactionContext, useCurrentUser } from "@canvas-ui/custom-components";
+import { useApi } from "@canvas-ui/react-hooks";
 interface Props extends BareProps {
   abbr: string;
   image: string;
@@ -25,6 +26,8 @@ function MyTokenCard({
 }: Props): React.ReactElement<Props> {
   //bjhl, possibly migrate over to cards.
   const transactionContext = useTransactionContext();
+  // const currentUserAccount = useCurrentUser();
+  // const api = useApi().api;
 
   const formatPrice = (val: string, cutoff = true) => {
     const _val = val.split(".");
@@ -54,7 +57,7 @@ function MyTokenCard({
           <button
             className="crypto-transfer-btn"
             onClick={() => {
-              transactionContext.initTransfer(abbr)
+              transactionContext.initTransfer(abbr);
             }}
           >
             Transfer

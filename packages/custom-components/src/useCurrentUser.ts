@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import useInjectedAccounts, { UseAccounts } from "./useInjectedAccounts";
+import { useApi } from "@canvas-ui/react-hooks";
+import { BN_TEN, formatBalance, isBn } from "@polkadot/util";
 
 import store from "store";
 
@@ -8,6 +10,7 @@ const STORAGE_KEY = "options:InputAddress";
 interface UseCurrentUser extends UseAccounts {
   currentAddress: string;
   setCurrentUser: Function;
+  getUserBalance: Function;
 }
 
 const CONTEXT_PLACEHOLDER = {
@@ -39,6 +42,21 @@ export function useCurrentUserContext() {
 export default function useCurrentUser(): UseCurrentUser {
   const [currentAddress, setCurrentAddress] = useState<string>("");
   const accountsInfo = useInjectedAccounts();
+  const api = useApi().api;
+
+  const getUserBalance = async () => {
+    if (currentAddress !== "") {
+      try {
+        const res = await api.query.system.account(currentAddress);
+        console.log(res.data.free.toString());
+        const amt = formatBalance(res.data.free, { withSi: false, forceUnit: "-" }, api.registry.chainDecimals);
+        return amt;
+      } catch (err) {
+        return err;
+      }
+    }
+    return Promise.reject("No address");
+  };
 
   const setCurrentUser = (address: string) => {
     if (accountsInfo.getAccount(address) !== undefined) {
@@ -62,5 +80,5 @@ export default function useCurrentUser(): UseCurrentUser {
     }
   }, [currentAddress]);
 
-  return { currentAddress, ...accountsInfo, setCurrentUser };
+  return { currentAddress, ...accountsInfo, setCurrentUser, getUserBalance };
 }

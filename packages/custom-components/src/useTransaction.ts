@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import useCurrentUser from "./useCurrentUser";
 import { useApi } from "@canvas-ui/react-hooks";
-// import { Keyring } from "@polkadot/api";
-import { keyring } from "@polkadot/ui-keyring";
-import { KeyringPair } from "@polkadot/keyring/types";
+import { toast } from "react-toastify";
 
 import { web3FromAddress } from "@polkadot/extension-dapp";
+import BN from "bn.js";
 
 interface UseTransaction {
   send: Function;
@@ -33,23 +32,27 @@ export default function useTransaction() {
   const api = useApi().api;
   const currentUserAccout = useCurrentUser();
   const SENDER = currentUserAccout.currentAddress;
-  const send = async (receiver: string, amount: number) => {
+  const send = async (receiver: string, amount: BN) => {
     if (SENDER && currentUserAccout.isReady) {
+      console.log("sender", SENDER, amount.toNumber());
+      // return;
       //const accountPair: KeyringPair = keyring.getPair(SENDER);
 
       const injector = await web3FromAddress(SENDER);
       api.setSigner(injector.signer);
       api.tx.balances
-        .transfer(receiver, amount)
+        .transfer(receiver, amount.toNumber())
         .signAndSend(SENDER, (result: any) => {
           if (result.isInBlock) {
+            toast(`Transaction in block at blockHash ${result.status.asInBlock}`);
             console.log(`Transaction in block at blockHash ${result.status.asInBlock}`);
           } else if (result.isFinalized) {
-            console.log(`Transaction finalized at blockHash ${result.status.asFinalized}`);
+            toast.success(`Transaction finalized at blockHash ${result.status.asFinalized}`);
+            console.log(`Transaction finalized block at blockHash ${result.status.asFinalized}`);
           } else if (result.isError) {
-            console.error(result.status);
+            toast.error(result.status);
           } else if (result.isWarning) {
-            console.warn(result.status);
+            toast.warn(result.status);
           }
         })
         .catch(err => {
