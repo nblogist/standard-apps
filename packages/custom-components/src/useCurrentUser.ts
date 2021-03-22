@@ -49,7 +49,7 @@ export default function useCurrentUser(): UseCurrentUser {
       try {
         const res = await api.query.system.account(currentAddress);
         console.log(res.data.free.toString());
-        const amt = formatBalance(res.data.free, { withSi: false, forceUnit: "-" }, api.registry.chainDecimals);
+        const amt = formatBalance(res.data.free, { withSi: false, forceUnit: "-" }, Number(api.registry.getChainProperties()?.tokenDecimals.toJSON()?.toString()));
         return amt;
       } catch (err) {
         return err;
